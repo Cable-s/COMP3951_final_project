@@ -7,17 +7,16 @@ using UnityEngine.UI;
 public class Tile : MonoBehaviour
 {
     [SerializeField] private GameObject highlight;
-    [SerializeField] private TextMeshProUGUI cardName;
-    [SerializeField] private Color mountainColor, riverColor, grasslandsColor, forestColor;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] internal Color mountainColor, riverColor, grasslandsColor, forestColor;
+    [SerializeField] internal SpriteRenderer spriteRenderer;
+
     private static System.Random rnd = new System.Random();
     private static int random = rnd.Next(-1000, 1000);
-    private GameObject buyMenu;
-    static private bool BuyMenuOpen = false;
+    private static BuyMenuManager buyMenu = null;
 
-    public void Start()
+    private void Start()
     {
-        buyMenu = GameObject.Find("BuyMenu");
+        if (buyMenu == null) buyMenu = Transform.FindAnyObjectByType<BuyMenuManager>();
     }
 
     public void Init(bool isOffset)
@@ -52,32 +51,7 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (BuyMenuOpen)
-        {
-            buyMenu.transform.position = new Vector3(buyMenu.transform.position.x - 200, buyMenu.transform.position.y, 0);
-            BuyMenuOpen = false;
-            //if (spriteRenderer.color == riverColor) {
-            //    cardName.text = "River";
-            //}
-            //else if (spriteRenderer.color == grasslandsColor)
-            //{
-            //    cardName.text = "Grasslands";
-///
-            //}
-            //else if (spriteRenderer.color == forestColor)
-            //{
-            //    cardName.text = "Forest";
-            //}
-            //else
-            //{
-            //    cardName.text = "Mountain";
-            //}
-        }
-        else
-        {
-            buyMenu.transform.position = new Vector3(buyMenu.transform.position.x + 200, buyMenu.transform.position.y, 0);
-            BuyMenuOpen = true;
-        }
+        buyMenu.toggle(this);
     }
 }
 
