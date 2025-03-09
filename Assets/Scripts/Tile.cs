@@ -27,7 +27,8 @@ public class Tile : MonoBehaviour
             spriteRenderer.color = forestColor;
 
         }
-        else {
+        else
+        {
             spriteRenderer.color = mountainColor;
         }
     }
@@ -36,8 +37,8 @@ public class Tile : MonoBehaviour
         highlight.SetActive(true);
     }
 
-    void OnMouseExit() {
+    void OnMouseExit()
+    {
         highlight.SetActive(false);
     }
 }
-
