@@ -49,9 +49,9 @@ public class Tile : MonoBehaviour
         highlight.SetActive(false);
     }
 
-    private void OnMouseDown()
-    {
-        buyMenu.toggle(this);
-    }
+    //private void OnMouseDown()
+    //{
+    //    buyMenu.toggle(this);
+    //}
 }
 
