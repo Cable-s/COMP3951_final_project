@@ -7,11 +7,14 @@ using TMPro;
 
 public class ResourceManager : MonoBehaviour
 {
-    [SerializeField] private int peopleCount;
-    [SerializeField] private int foodCount;
-    [SerializeField] private int waterCount;
-    [SerializeField] private int woodCount;
-    [SerializeField] private int metalCount;
+    internal int dayCount { get; set; } = 1;
+    //[field: SerializeField] to have a serialized field on a property.
+    [field: SerializeField] internal int peopleCount { get; set; }
+    [field: SerializeField] internal int foodCount { get; set; }
+    [field: SerializeField] internal int waterCount { get; set; }
+    [field: SerializeField] internal int woodCount { get; set; }
+    [field: SerializeField] internal int metalCount { get; set; }
+    [SerializeField] private TextMeshProUGUI dayText;
     [SerializeField] private TextMeshProUGUI peopleText;
     [SerializeField] private TextMeshProUGUI foodText;
     [SerializeField] private TextMeshProUGUI waterText;
@@ -23,8 +26,9 @@ public class ResourceManager : MonoBehaviour
         updateResourceCountText();
     }
 
-    private void updateResourceCountText()
+    public void updateResourceCountText()
     {
+        dayText.text = "Day " + dayCount;
         peopleText.text = "People " + peopleCount;
         foodText.text = "Food " + foodCount;
         waterText.text = "Water " + waterCount;
