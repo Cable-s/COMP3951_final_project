@@ -19,17 +19,19 @@ public class NextDay : MonoBehaviour
 
     void nextDay()
     {
+        print("next day");
         //increment day count
         resourceManager.dayCount++;
-
+        BoundsInt bounds = buildingMap.cellBounds;
         //get all buildings on board
-        for (int i = 0; i < mapGenerator.width; i++)
+        for (int x = bounds.x; x < bounds.xMax; x++)
         {
-            for (int j = 0; j < mapGenerator.height; j++)
+            for (int y = bounds.y; y < bounds.yMax; y++)
             {
-                if (buildingMap.GetTile(new Vector3Int(i, j, 0))) {
+                if (buildingMap.GetTile(new Vector3Int(x, y, 0)) != null)
+                {
                     //add that buildings resource to running count
-                    switch (terrainMap.GetTile(new Vector3Int(i, j, 0)).name)
+                    switch (terrainMap.GetTile(new Vector3Int(x, y, 0)).name)
                     {
                         case "forest_tile_0":
                             resourceManager.woodCount++;
@@ -51,3 +53,4 @@ public class NextDay : MonoBehaviour
         resourceManager.updateResourceCountText();
     }
 }
+
