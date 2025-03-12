@@ -1,42 +1,49 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class BuyMenuManager : MonoBehaviour
 {
+    [SerializeField] private Grid grid;
+    [SerializeField] private CanvasRenderer card;
+    [SerializeField] private MapGenerator mapGenerator;
     private TextMeshProUGUI SideBarName;
+    private TextMeshProUGUI cardName;
+    private TextMeshProUGUI price;
+    private TextMeshProUGUI priceAmount;
+    private TileBase tile;
+    private Vector3Int tilePosition;
     static private bool BuyMenuOpen = false;
 
-    public void toggle(MapGenerator mapGenerator)
+    public void toggle()
     {
-        print("Toggle called.");
-
         if (BuyMenuOpen)
         {
-            this.transform.position = new Vector3(this.transform.position.x - 200, this.transform.position.y, 0);
+            this.GetComponent<RectTransform>().transform.localScale = new Vector3(1, 1, 1);
             BuyMenuOpen = false;
-            print("Buy Menu Open if true.");
         }
         else
         {
-            print("Buy Menu Open if false.");
-
+            tile = mapGenerator.tilemap.GetTile(grid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+            tilePosition = grid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             TextMeshProUGUI[] ts = this.transform.GetComponentsInChildren<TextMeshProUGUI>();
             foreach (TextMeshProUGUI t in ts)
             {
                 if (t.name == "Header") SideBarName = t;
             }
-
-            if (Input.GetMouseButton(0) == mapGenerator.waterTile)
+            if (tile == mapGenerator.waterTile)
             {
-                SideBarName.text = "River";
+                SideBarName.text = "Water";
             }
-            else if (Input.GetMouseButton(0) == mapGenerator.grasslandTile)
+            else if (tile == mapGenerator.grasslandTile)
             {
                 SideBarName.text = "Grasslands";
 
             }
-            else if (Input.GetMouseButton(0) == mapGenerator.forestTile)
+            else if (tile == mapGenerator.forestTile)
             {
                 SideBarName.text = "Forest";
             }
@@ -44,8 +51,49 @@ public class BuyMenuManager : MonoBehaviour
             {
                 SideBarName.text = "Mountain";
             }
-            this.transform.position = new Vector3(this.transform.position.x + 200, this.transform.position.y, 0);
+            this.GetComponent<RectTransform>().transform.localScale = new Vector3(0,0,0);
             BuyMenuOpen = true;
+            UpdateCard();
         }
+    }
+
+    private void UpdateCard()
+    {
+        TextMeshProUGUI[] ts = this.transform.GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (TextMeshProUGUI t in ts)
+        {
+            if (t.name == "CardName") cardName = t;
+            if (t.name == "Price") price = t;
+            if (t.name == "PriceAmount") priceAmount = t;
+        }
+        switch (tile.name) {
+            case "grassland_tile_0":
+                cardName.text = "grassland Building";
+                price.text = "People";
+                priceAmount.text = "5";
+                break;
+            case "water_tile_0":
+                cardName.text = "water Building";
+                price.text = "People";
+                priceAmount.text = "5";
+                break;
+            case "mountain_tile_0":
+                cardName.text = "mountain Building";
+                price.text = "People";
+                priceAmount.text = "5";
+                break;
+            case "forest_tile_0":
+                cardName.text = "forest Building";
+                price.text = "People";
+                priceAmount.text = "5";
+                break;
+        }
+    }
+
+    public void BuyEvent()
+    {
+        print("hello");
+        mapGenerator.addBuilding(tilePosition);
+
     }
 }

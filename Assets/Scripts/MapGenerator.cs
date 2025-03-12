@@ -2,11 +2,12 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 public class MapGenerator : MonoBehaviour
 {
-    [SerializeField] private Tilemap tilemap;
+    [SerializeField] internal Tilemap tilemap;
     [SerializeField] private Tilemap interactiveMap;
     [SerializeField] private Tilemap buildingMap;
     [SerializeField] internal TileBase waterTile, grasslandTile, forestTile, mountainTile, hoverTile, building;
@@ -52,10 +53,10 @@ public class MapGenerator : MonoBehaviour
         // Left mouse click -> add building
         if (Input.GetMouseButton(0))
         {
-            print(currentMousePosition);
-            if (currentMousePosition.x >= Mathf.Floor(-1 * width / 2) && currentMousePosition.x <= Mathf.Floor(width / 2) && currentMousePosition.y >= Mathf.Floor(-1 * height / 2) && currentMousePosition.y <= Mathf.Floor(height / 2)) {
-                buildingMap.SetTile(currentMousePosition, building);
-            }
+            //if (currentMousePosition.x >= Mathf.Floor(-1 * width / 2) && currentMousePosition.x <= Mathf.Floor(width / 2) && currentMousePosition.y >= Mathf.Floor(-1 * height / 2) && currentMousePosition.y <= Mathf.Floor(height / 2)) {
+            //    buildingMap.SetTile(currentMousePosition, building);
+            //}
+            //buyMenu.toggle(this);
         }
 
         // Right mouse click -> remove building
@@ -65,11 +66,19 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    public void addBuilding(Vector3Int tilePosition)
+    {
+        print("hello2");
+        buildingMap.SetTile(tilePosition, building);
+    }
+
     void OnMouseDown()
     {
         Debug.Log("On Mouse Down -> buyMenu is called.");
-
-        buyMenu.toggle(this);
+        if (GetMousePosition().x >= Mathf.Floor(-1 * width / 2) && GetMousePosition().x <= Mathf.Floor(width / 2) && GetMousePosition().y >= Mathf.Floor(-1 * height / 2) && GetMousePosition().y <= Mathf.Floor(height / 2))
+        {
+            buyMenu.toggle();
+        }
     }
 
     /// <summary>
