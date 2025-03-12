@@ -52,7 +52,10 @@ public class MapGenerator : MonoBehaviour
         // Left mouse click -> add building
         if (Input.GetMouseButton(0))
         {
-            buildingMap.SetTile(currentMousePosition, building);
+            print(currentMousePosition);
+            if (currentMousePosition.x >= Mathf.Floor(-1 * width / 2) && currentMousePosition.x <= Mathf.Floor(width / 2) && currentMousePosition.y >= Mathf.Floor(-1 * height / 2) && currentMousePosition.y <= Mathf.Floor(height / 2)) {
+                buildingMap.SetTile(currentMousePosition, building);
+            }
         }
 
         // Right mouse click -> remove building
