@@ -22,6 +22,7 @@ public class NextDay : MonoBehaviour
         print("next day");
         //increment day count
         resourceManager.dayCount++;
+        print(resourceManager.dayCount);
         BoundsInt bounds = buildingMap.cellBounds;
         //get all buildings on board
         for (int x = bounds.x; x < bounds.xMax; x++)
@@ -44,6 +45,8 @@ public class NextDay : MonoBehaviour
                             break;
                         case "water_tile_0":
                             resourceManager.waterCount++;
+                            break;
+                        default:
                             break;
                     }
                 }

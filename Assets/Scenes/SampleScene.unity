@@ -985,11 +985,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a1d0068d8454f842a6eefe691fcadc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  peopleCount: 5
-  foodCount: 0
-  waterCount: 10
-  woodCount: 20
-  metalCount: 0
+  <dayCount>k__BackingField: 1
+  <peopleCount>k__BackingField: 0
+  <foodCount>k__BackingField: 0
+  <waterCount>k__BackingField: 0
+  <woodCount>k__BackingField: 0
+  <metalCount>k__BackingField: 0
+  dayText: {fileID: 564232937}
   peopleText: {fileID: 1676058132}
   foodText: {fileID: 244299704}
   waterText: {fileID: 229242270}
@@ -1003,7 +1005,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556267468}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.5009367, y: -0.737539, z: -15.288377}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1294,6 +1296,7 @@ GameObject:
   - component: {fileID: 618846188}
   - component: {fileID: 618846187}
   - component: {fileID: 618846186}
+  - component: {fileID: 618846189}
   m_Layer: 5
   m_Name: ButtonNextDay
   m_TagString: Untagged
@@ -1403,6 +1406,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618846184}
   m_CullTransparentMesh: 1
+--- !u!114 &618846189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618846184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a1c1d8205b9c5b479cddbcc7d2b1805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceManager: {fileID: 556267469}
+  mapGenerator: {fileID: 1198752832}
+  buildingMap: {fileID: 1071015108}
+  terrainMap: {fileID: 1901847175}
 --- !u!1 &676675294
 GameObject:
   m_ObjectHideFlags: 0

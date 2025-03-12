@@ -7,7 +7,7 @@ using TMPro;
 
 public class ResourceManager : MonoBehaviour
 {
-    internal int dayCount { get; set; } = 1;
+    [field: SerializeField] internal int dayCount { get; set; } = 1;
     //[field: SerializeField] to have a serialized field on a property.
     [field: SerializeField] internal int peopleCount { get; set; }
     [field: SerializeField] internal int foodCount { get; set; }
