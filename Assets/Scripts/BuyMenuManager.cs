@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
+using System.Net.NetworkInformation;
 
 public class BuyMenuManager : MonoBehaviour
 {
     [SerializeField] private Grid grid;
     [SerializeField] private CanvasRenderer card;
     [SerializeField] private MapGenerator mapGenerator;
+    [SerializeField] private buildingContext buildingContext;
+    [SerializeField] private Tilemap buildingMap;
     private TextMeshProUGUI SideBarName;
     private TextMeshProUGUI cardName;
     private TextMeshProUGUI price;
@@ -92,8 +95,31 @@ public class BuyMenuManager : MonoBehaviour
 
     public void BuyEvent()
     {
-        print("hello");
-        mapGenerator.addBuilding(tilePosition);
-
+        if (tile.name == "grassland_tile_0")
+        {
+            IBuilding building = new GrasslandBuilding();
+            print(buildingContext.getGrasslandBuildingTile());
+            building.tile = buildingContext.getGrasslandBuildingTile();
+            buildingContext.setBuilding(building);
+        }
+        else if (tile.name == "water_tile_0")
+        {
+            IBuilding building = new WaterBuilding();
+            building.tile = buildingContext.getWaterBuildingTile();
+            buildingContext.setBuilding(building);
+        }
+        else if (tile.name == "mountain_tile_0")
+        {
+            IBuilding building = new MountainBuilding();
+            building.tile = buildingContext.getMountainBuildingTile();
+            buildingContext.setBuilding(building);
+        }
+        else
+        {
+            IBuilding building = new ForestBuilding();
+            building.tile = buildingContext.getForestBuildingTile();
+            buildingContext.setBuilding(building);
+        }
+        buildingContext.addBuildingToTile(tilePosition, buildingMap);
     }
 }

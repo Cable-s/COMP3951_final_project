@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 375e1b7976655de449d74b37545f520b
+guid: 33ba9304856a970449da4618a0163c81
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2569119218762868166
-    second: building_0
+      213: 2864977849067626640
+    second: grasslandBuilding 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,24 +96,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: building_0
+      name: grasslandBuilding 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a3a920caea7a85cd0800000000000000
-      internalID: -2569119218762868166
+      spriteID: 090e907ac2272c720800000000000000
+      internalID: 2864977849067626640
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      building_0: -2569119218762868166
+      grasslandBuilding 1_0: 2864977849067626640
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

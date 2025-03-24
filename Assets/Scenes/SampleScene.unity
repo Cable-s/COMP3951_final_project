@@ -851,6 +851,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285056902}
   m_CullTransparentMesh: 1
+--- !u!1 &303321029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 303321031}
+  - component: {fileID: 303321030}
+  m_Layer: 0
+  m_Name: buildingContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &303321030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303321029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5848135f8141834ab097ced7a24dfdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterBuildingTile: {fileID: 11400000, guid: d5d6ebfef4b8b8b45810febda31efdbf, type: 2}
+  forestTileBuilding: {fileID: 11400000, guid: 6de2bc3809c31c542aa5adfbe82a56f7, type: 2}
+  mountainTileBuilding: {fileID: 11400000, guid: 48f25ef6c4838984eaf86c93f0c95223, type: 2}
+  grasslandTileBuilding: {fileID: 11400000, guid: 41ee9ea0b0a77c7429cde8e2e178630e, type: 2}
+--- !u!4 &303321031
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303321029}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 637.73486, y: 243.28258, z: -3.073037}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,7 +1646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000015258789, y: 5.9826946}
+  m_AnchoredPosition: {x: 0, y: 5.9826965}
   m_SizeDelta: {x: 0, y: -129.5445}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &676675296
@@ -1837,8 +1885,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -159.86993, y: -28.061707}
-  m_SizeDelta: {x: -319.7466, y: -56.1254}
+  m_AnchoredPosition: {x: -353.09137, y: -28.061707}
+  m_SizeDelta: {x: -706.1895, y: -56.1254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &874107769
 MonoBehaviour:
@@ -1893,6 +1941,8 @@ MonoBehaviour:
   grid: {fileID: 1198752833}
   card: {fileID: 676675297}
   mapGenerator: {fileID: 1198752832}
+  buildingContext: {fileID: 303321030}
+  buildingMap: {fileID: 1071015108}
 --- !u!1 &922605985
 GameObject:
   m_ObjectHideFlags: 0
@@ -2188,7 +2238,6 @@ MonoBehaviour:
   forestTile: {fileID: 11400000, guid: a1f5ddfcf8c688d499795c97f9e977ce, type: 2}
   mountainTile: {fileID: 11400000, guid: 0f496470a46ef954293f5024df80d565, type: 2}
   hoverTile: {fileID: 11400000, guid: 9122525c605c8424f9293b895dea44a6, type: 2}
-  building: {fileID: 11400000, guid: 48f25ef6c4838984eaf86c93f0c95223, type: 2}
   width: 40
   height: 40
   noiseScale: 0.5
@@ -3274,6 +3323,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 107312133}
+  - {fileID: 303321031}
   - {fileID: 794140177}
   - {fileID: 1872280564}
   - {fileID: 556267470}

@@ -10,7 +10,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] internal Tilemap tilemap;
     [SerializeField] private Tilemap interactiveMap;
     [SerializeField] private Tilemap buildingMap;
-    [SerializeField] internal TileBase waterTile, grasslandTile, forestTile, mountainTile, hoverTile, building;
+    [SerializeField] internal TileBase waterTile, grasslandTile, forestTile, mountainTile, hoverTile;
 
     private Grid grid;
 
@@ -64,12 +64,6 @@ public class MapGenerator : MonoBehaviour
         {
             buildingMap.SetTile(currentMousePosition, null);
         }
-    }
-
-    public void addBuilding(Vector3Int tilePosition)
-    {
-        print("hello2");
-        buildingMap.SetTile(tilePosition, building);
     }
 
     void OnMouseDown()
