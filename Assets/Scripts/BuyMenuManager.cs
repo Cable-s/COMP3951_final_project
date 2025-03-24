@@ -98,26 +98,21 @@ public class BuyMenuManager : MonoBehaviour
         if (tile.name == "grassland_tile_0")
         {
             IBuilding building = new GrasslandBuilding();
-            print(buildingContext.getGrasslandBuildingTile());
-            building.tile = buildingContext.getGrasslandBuildingTile();
             buildingContext.setBuilding(building);
         }
         else if (tile.name == "water_tile_0")
         {
             IBuilding building = new WaterBuilding();
-            building.tile = buildingContext.getWaterBuildingTile();
             buildingContext.setBuilding(building);
         }
         else if (tile.name == "mountain_tile_0")
         {
             IBuilding building = new MountainBuilding();
-            building.tile = buildingContext.getMountainBuildingTile();
             buildingContext.setBuilding(building);
         }
         else
         {
             IBuilding building = new ForestBuilding();
-            building.tile = buildingContext.getForestBuildingTile();
             buildingContext.setBuilding(building);
         }
         buildingContext.addBuildingToTile(tilePosition, buildingMap);

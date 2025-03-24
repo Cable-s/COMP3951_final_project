@@ -7,6 +7,14 @@ public class buildingContext : MonoBehaviour
     private IBuilding building;
     [SerializeField] internal TileBase waterBuildingTile, forestTileBuilding, mountainTileBuilding, grasslandTileBuilding;
 
+    public void Start()
+    {
+        ForestBuilding.tile = forestTileBuilding;
+        WaterBuilding.tile = waterBuildingTile;
+        MountainBuilding.tile = mountainTileBuilding;
+        GrasslandBuilding.tile = grasslandTileBuilding;
+    }
+
     public TileBase getWaterBuildingTile()
     {
         return waterBuildingTile;
@@ -40,7 +48,7 @@ public class buildingContext : MonoBehaviour
 
 public interface IBuilding
 {
-    public TileBase tile
+    public static TileBase tile
     {
         get;
         set;
@@ -50,7 +58,7 @@ public interface IBuilding
 
 public class ForestBuilding : IBuilding
 {
-    public TileBase tile { get; set; }
+    public static TileBase tile { get; set; }
     public void addBuildingToTile(Vector3Int tilePosition, Tilemap buildingMap)
     {
         buildingMap.SetTile(tilePosition, tile);
@@ -59,7 +67,7 @@ public class ForestBuilding : IBuilding
 
 public class WaterBuilding : IBuilding
 {
-    public TileBase tile { get; set; }
+    public static TileBase tile { get; set; }
     public void addBuildingToTile(Vector3Int tilePosition, Tilemap buildingMap)
     {
         buildingMap.SetTile(tilePosition, tile);
@@ -68,7 +76,7 @@ public class WaterBuilding : IBuilding
 
 public class MountainBuilding : IBuilding
 {
-    public TileBase tile { get; set; }
+    public static TileBase tile { get; set; }
     public void addBuildingToTile(Vector3Int tilePosition, Tilemap buildingMap)
     {
         buildingMap.SetTile(tilePosition, tile) ;
@@ -77,7 +85,7 @@ public class MountainBuilding : IBuilding
 
 public class GrasslandBuilding : IBuilding
 {
-    public TileBase tile { get; set; }
+    public static TileBase tile { get; set; }
     public void addBuildingToTile(Vector3Int tilePosition, Tilemap buildingMap)
     {
         buildingMap.SetTile(tilePosition, tile);
