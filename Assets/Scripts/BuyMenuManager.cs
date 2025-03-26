@@ -116,5 +116,7 @@ public class BuyMenuManager : MonoBehaviour
             buildingContext.setBuilding(building);
         }
         buildingContext.addBuildingToTile(tilePosition, buildingMap);
+
+        mapGenerator.RevealFog(tilePosition, 1);
     }
 }
