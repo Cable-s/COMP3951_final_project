@@ -41,7 +41,7 @@ public class PauseMenu : MonoBehaviour
     /// <summary>
     /// Resume Method, hides the PauseMenu and resumes game.
     /// </summary>
-    void Resume()
+    public void Resume()
     {
         PauseMenuUI.SetActive(false);
         GameIsPaused = false;
@@ -50,7 +50,7 @@ public class PauseMenu : MonoBehaviour
     /// <summary>
     /// MainMenu Method, returns the user to the main menu.
     /// </summary>
-    void MainMenu()
+    public void MainMenu()
     {
         SceneManager.LoadSceneAsync(1);
     }
@@ -58,7 +58,7 @@ public class PauseMenu : MonoBehaviour
     /// <summary>
     /// Quit method, allows the user to exit the application from in the game.
     /// </summary>
-    void Quit()
+    public void Quit()
     {
         Application.Quit();
     }
