@@ -32,7 +32,7 @@ public class PauseMenu : MonoBehaviour
     /// <summary>
     /// Pause Method, brings up the PauseMenuUI.
     /// </summary>
-    void Pause()
+    public void Pause()
     {
         PauseMenuUI.SetActive(true);
         GameIsPaused = true;
