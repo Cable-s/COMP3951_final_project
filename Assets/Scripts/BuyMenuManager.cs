@@ -30,7 +30,7 @@ public class BuyMenuManager : MonoBehaviour
         }
         else
         {
-            tile = mapGenerator.tilemap.GetTile(grid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+            tile = mapGenerator.Tilemap.GetTile(grid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
             tilePosition = grid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             TextMeshProUGUI[] ts = this.transform.GetComponentsInChildren<TextMeshProUGUI>();
             foreach (TextMeshProUGUI t in ts)
@@ -95,17 +95,24 @@ public class BuyMenuManager : MonoBehaviour
 
     public void BuyEvent()
     {
-        if (tile.name == "grassland_tile_0")
+        // Check if this tile is still fogged
+        if (mapGenerator.FogOfWar.GetTile(tilePosition) != null)
+        {
+            Debug.Log("Cannot place building in fogged area!"); // For testing purposes TO BE REMOVED 
+            return;
+        }
+
+        if (tile.name == "basetile_0")
         {
             IBuilding building = new GrasslandBuilding();
             buildingContext.setBuilding(building);
         }
-        else if (tile.name == "water_tile_0")
+        else if (tile.name == "water_0")
         {
             IBuilding building = new WaterBuilding();
             buildingContext.setBuilding(building);
         }
-        else if (tile.name == "mountain_tile_0")
+        else if (tile.name == "rock_0")
         {
             IBuilding building = new MountainBuilding();
             buildingContext.setBuilding(building);
@@ -117,6 +124,6 @@ public class BuyMenuManager : MonoBehaviour
         }
         buildingContext.addBuildingToTile(tilePosition, buildingMap);
 
-        mapGenerator.RevealFog(tilePosition, 1);
+        mapGenerator.RevealFog(tilePosition, 2);
     }
 }
