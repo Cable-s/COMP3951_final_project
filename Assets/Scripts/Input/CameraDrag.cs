@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 
 public class CameraDrag : MonoBehaviour
 {
-    private const float MaxZoomOut = 1.8f;
-    private const float MinZoomIn = 0.5f;
+    private const float MaxZoomOut = 2f;
+    private const float MinZoomIn = 0.7f;
 
     private Vector3 origin;
     private Vector3 difference;

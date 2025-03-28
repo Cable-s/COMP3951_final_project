@@ -20,8 +20,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private TileBase fogTile;
 
     [Header("Map Configuration")]
-    public int width = 20;
-    public int height = 20;
+    public int width = 30;
+    public int height = 30;
     public float noiseScale = 1.5f;
 
     private Grid grid;
@@ -49,7 +49,7 @@ public class MapGenerator : MonoBehaviour
     private void Start()
     {
         GenerateMap();
-        RevealFog(Vector3Int.zero, 3);
+        RevealFog(Vector3Int.zero, 4);
     }
 
     private void Update()

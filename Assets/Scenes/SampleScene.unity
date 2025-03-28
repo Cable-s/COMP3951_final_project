@@ -961,7 +961,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.8
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1861,7 +1861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &794140174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2444,8 +2444,8 @@ MonoBehaviour:
   mountainTile: {fileID: 11400000, guid: ceb2995efa4201048a1ce6679bddc40a, type: 2}
   hoverTile: {fileID: 11400000, guid: 9122525c605c8424f9293b895dea44a6, type: 2}
   fogTile: {fileID: 11400000, guid: 66e26582a2b4c6e4582ddd96251eaa45, type: 2}
-  width: 20
-  height: 20
+  width: 30
+  height: 30
   noiseScale: 0.5
 --- !u!156049354 &1198752833
 Grid:
@@ -2523,7 +2523,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 6.45, y: 6.45}
+  m_Size: {x: 9.6, y: 9.6}
   m_EdgeRadius: 0
 --- !u!114 &1198752836
 MonoBehaviour:
