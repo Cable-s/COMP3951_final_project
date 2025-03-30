@@ -32,18 +32,18 @@ public class NextDay : MonoBehaviour
                 if (buildingMap.GetTile(new Vector3Int(x, y, 0)) != null)
                 {
                     //add that buildings resource to running count
-                    switch (terrainMap.GetTile(new Vector3Int(x, y, 0)).name)
+                    switch (buildingMap.GetTile(new Vector3Int(x, y, 0)).name)
                     {
-                        case "forest_tile_0":
+                        case "forestBuilding":
                             resourceManager.woodCount++;
                             break;
-                        case "mountain_tile_0":
+                        case "mountainBuilding":
                             resourceManager.metalCount++;
                             break;
-                        case "grassland_tile_0":
+                        case "house_0":
                             resourceManager.foodCount++;
                             break;
-                        case "water_tile_0":
+                        case "boat2_0":
                             resourceManager.waterCount++;
                             break;
                         default:
