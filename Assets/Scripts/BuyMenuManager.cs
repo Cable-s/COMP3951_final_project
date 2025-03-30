@@ -43,13 +43,6 @@ public class BuyMenuManager : MonoBehaviour
     /// </summary>
     public void toggle()
     {
-        if (BuyMenuOpen)
-        {
-            this.GetComponent<RectTransform>().transform.localScale = new Vector3(1, 1, 1);
-            BuyMenuOpen = false;
-        }
-        else
-        {
             tile = mapGenerator.Tilemap.GetTile(grid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
             tilePosition = grid.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             TextMeshProUGUI[] ts = this.transform.GetComponentsInChildren<TextMeshProUGUI>();
@@ -74,10 +67,9 @@ public class BuyMenuManager : MonoBehaviour
             {
                 SideBarName.text = "Mountain";
             }
-            this.GetComponent<RectTransform>().transform.localScale = new Vector3(0,0,0);
+            this.GetComponent<RectTransform>().transform.localScale = new Vector3(1, 1, 1);
             BuyMenuOpen = true;
             UpdateCard();
-        }
     }
 
     /// <summary>
@@ -161,5 +153,11 @@ public class BuyMenuManager : MonoBehaviour
         }
 
         mapGenerator.RevealFog(tilePosition, 2); // reveal a small area of fog after a building is bought
+    }
+
+    public void CloseBuyMenu()
+    {
+        this.GetComponent<RectTransform>().transform.localScale = new Vector3(0, 0, 0);
+        BuyMenuOpen = true;
     }
 }
