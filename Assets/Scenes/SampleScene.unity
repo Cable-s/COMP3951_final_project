@@ -1954,7 +1954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <dayCount>k__BackingField: 1
-  <peopleCount>k__BackingField: 0
+  <peopleCount>k__BackingField: 5
   <foodCount>k__BackingField: 0
   <waterCount>k__BackingField: 0
   <woodCount>k__BackingField: 0
@@ -3006,6 +3006,7 @@ MonoBehaviour:
   mapGenerator: {fileID: 1198752832}
   buildingContext: {fileID: 303321030}
   buildingMap: {fileID: 1071015108}
+  resourceManager: {fileID: 556267469}
 --- !u!1 &922605985
 GameObject:
   m_ObjectHideFlags: 0

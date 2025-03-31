@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using System.Net.NetworkInformation;
+using System.Resources;
 
 public class BuyMenuManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class BuyMenuManager : MonoBehaviour
     [SerializeField] private MapGenerator mapGenerator;
     [SerializeField] private buildingContext buildingContext;
     [SerializeField] private Tilemap buildingMap;
+    [SerializeField] private ResourceManager resourceManager;
     private TextMeshProUGUI SideBarName;
     private TextMeshProUGUI cardName;
     private TextMeshProUGUI price;
@@ -143,16 +145,21 @@ public class BuyMenuManager : MonoBehaviour
             IBuilding building = new ForestBuilding();
             buildingContext.setBuilding(building);
         }
-
-        buildingContext.addBuildingToTile(tilePosition, buildingMap);
-
-        // Do not remove water tile when placing building on top
-        if (tile.name != "water_0")
+        if (resourceManager.peopleCount >= buildingContext.building.cost)
         {
-            mapGenerator.Tilemap.SetTile(tilePosition, null);
-        }
+            resourceManager.peopleCount -= buildingContext.building.cost;
+            resourceManager.updateResourceCountText();
+            buildingContext.addBuildingToTile(tilePosition, buildingMap);
 
-        mapGenerator.RevealFog(tilePosition, 2); // reveal a small area of fog after a building is bought
+
+            // Do not remove water tile when placing building on top
+            if (tile.name != "water_0")
+            {
+                mapGenerator.Tilemap.SetTile(tilePosition, null);
+            }
+
+            mapGenerator.RevealFog(tilePosition, 2); // reveal a small area of fog after a building is bought
+        }
     }
 
     public void CloseBuyMenu()

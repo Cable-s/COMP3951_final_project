@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 ///</summary>
 public class buildingContext : MonoBehaviour
 {
-    private IBuilding building;
+    internal IBuilding building;
     [SerializeField] internal TileBase waterBuildingTile, forestTileBuilding, mountainTileBuilding, grasslandTileBuilding;
        
     /// <summary>
@@ -60,6 +60,15 @@ public interface IBuilding
     }
 
     /// <summary>
+    /// int property for the building cost.
+    /// </summary>
+    public int cost
+    {
+        get;
+        set;
+    }
+
+    /// <summary>
     /// Add the current building to the tilemap.
     /// </summary>
     /// <param name="tilePosition">The position of the building</param>
@@ -76,6 +85,11 @@ public class ForestBuilding : IBuilding
     /// Static TileBase field for the building 'sprite'.
     /// </summary>
     public static TileBase tile { get; set; }
+
+    /// <summary>
+    /// int property for the building cost.
+    /// </summary>
+    public int cost { get; set; } = 5;
 
     /// <summary>
     /// Add the current building to the tilemap.
@@ -99,6 +113,12 @@ public class WaterBuilding : IBuilding
     public static TileBase tile { get; set; }
 
     /// <summary>
+    /// int property for the building cost.
+    /// </summary>
+    public int cost { get; set; } = 4;
+
+
+    /// <summary>
     /// Add the current building to the tilemap.
     /// </summary>
     /// <param name="tilePosition">The position of the building</param>
@@ -120,6 +140,12 @@ public class MountainBuilding : IBuilding
     public static TileBase tile { get; set; }
 
     /// <summary>
+    /// int property for the building cost.
+    /// </summary>
+    public int cost { get; set; } = 3;
+
+
+    /// <summary>
     /// Add the current building to the tilemap.
     /// </summary>
     /// <param name="tilePosition">The position of the building</param>
@@ -139,6 +165,12 @@ public class GrasslandBuilding : IBuilding
     /// Static TileBase field for the building 'sprite'.
     /// </summary>
     public static TileBase tile { get; set; }
+
+    /// <summary>
+    /// int property for the building cost.
+    /// </summary>
+    public int cost { get; set; } = 2;
+
 
     /// <summary>
     /// Add the current building to the tilemap.
