@@ -39,6 +39,7 @@ public class MapGenerator : MonoBehaviour
 
     public Tilemap Tilemap => tilemap;
     public Tilemap FogOfWar => fogOfWarMap;
+    public Tilemap BuildingMap => buildingMap;
 
     /// <summary>
     /// Called when the script instance is being loaded.
