@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public class NextDay : MonoBehaviour
 {
     [SerializeField] private ResourceManager resourceManager;
+    [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private MapGenerator mapGenerator;
     [SerializeField] private Tilemap buildingMap;
     [SerializeField] private Tilemap terrainMap;
@@ -29,12 +30,16 @@ public class NextDay : MonoBehaviour
         {
             for (int y = bounds.y; y < bounds.yMax; y++)
             {
-                if (buildingMap.GetTile(new Vector3Int(x, y, 0)) != null)
+                Vector3Int currentCell = new Vector3Int(x, y, 0);
+                TileBase currentTile = buildingMap.GetTile(currentCell);
+
+                if (currentTile != null)
                 {
                     //add that buildings resource to running count
-                    switch (buildingMap.GetTile(new Vector3Int(x, y, 0)).name)
+                    switch (currentTile.name)
                     {
                         case "forestBuilding":
+                            print("FOREST BUILDING LOCATED AT " + x + ", " + y);
                             resourceManager.woodCount++;
                             break;
                         case "mountainBuilding":
@@ -54,6 +59,7 @@ public class NextDay : MonoBehaviour
         }
         //update UI for resources to have updated 
         resourceManager.updateResourceCountText();
+        enemyManager.updateEnemies();
     }
 }
 

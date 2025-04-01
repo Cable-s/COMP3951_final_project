@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Handles map generation, tile placement, and user interactions (such as hovering and clicking) on the map.
@@ -16,7 +17,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private Tilemap interactiveMap;  
     [SerializeField] private Tilemap buildingMap;     
     [SerializeField] private Tilemap fogOfWarMap;     
-    [SerializeField] private Tilemap baseMap;           
+    [SerializeField] private Tilemap baseMap;
 
     [Header("Tile Assets")]
     [SerializeField] private TileBase baseTile;
