@@ -3638,6 +3638,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522439078}
   m_CullTransparentMesh: 1
+--- !u!1 &532490193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 532490195}
+  - component: {fileID: 532490194}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &532490194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532490193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb0556a9e97e00b44a98062bb7f481e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesMap: {fileID: 1492868557}
+  enemyTile: {fileID: 11400000, guid: 7e439e8db9f3c5849a28915773756474, type: 2}
+--- !u!4 &532490195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532490193}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &534283211
 GameObject:
   m_ObjectHideFlags: 0
@@ -4237,10 +4283,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceManager: {fileID: 556267469}
+  enemyManager: {fileID: 532490194}
   mapGenerator: {fileID: 1198752832}
   buildingMap: {fileID: 1071015108}
   terrainMap: {fileID: 1901847175}
-  enemiesMap: {fileID: 1492868557}
 --- !u!1 &635613319
 GameObject:
   m_ObjectHideFlags: 0
@@ -6139,7 +6185,6 @@ MonoBehaviour:
   buildingMap: {fileID: 1071015108}
   fogOfWarMap: {fileID: 483951977}
   baseMap: {fileID: 274130823}
-  enemiesMap: {fileID: 1492868557}
   baseTile: {fileID: 11400000, guid: 90c2dc1cb15e0ab4e87616733e294d06, type: 2}
   waterTile: {fileID: 11400000, guid: 02c14f58f841e0e4caf2ae3a061e12f8, type: 2}
   grasslandTile: {fileID: 11400000, guid: e81bfbc2c25aa94479c19bf975608cd7, type: 2}
@@ -6147,7 +6192,6 @@ MonoBehaviour:
   mountainTile: {fileID: 11400000, guid: 1bb4486a639e86e4da5ecc3f9196a526, type: 2}
   hoverTile: {fileID: 11400000, guid: 9122525c605c8424f9293b895dea44a6, type: 2}
   fogTile: {fileID: 11400000, guid: 27858e3102298c24ea096f4fd7856019, type: 2}
-  enemyTile: {fileID: 11400000, guid: 7e439e8db9f3c5849a28915773756474, type: 2}
   width: 30
   height: 30
   noiseScale: 1.5
@@ -10054,3 +10098,4 @@ SceneRoots:
   - {fileID: 1198752834}
   - {fileID: 701315500}
   - {fileID: 1627207277}
+  - {fileID: 532490195}
