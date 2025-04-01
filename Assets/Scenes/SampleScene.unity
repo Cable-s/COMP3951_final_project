@@ -1936,7 +1936,7 @@ GameObject:
   - component: {fileID: 303321031}
   - component: {fileID: 303321030}
   m_Layer: 0
-  m_Name: buildingContext
+  m_Name: BuildingContext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1955,11 +1955,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterBuildingTile: {fileID: 11400000, guid: db092c6a37c98e4489117c4115bddd02, type: 2}
-  forestTileBuilding: {fileID: 11400000, guid: 6de2bc3809c31c542aa5adfbe82a56f7, type: 2}
-  mountainTileBuilding: {fileID: 11400000, guid: 48f25ef6c4838984eaf86c93f0c95223, type: 2}
+  forestTileBuilding: {fileID: 11400000, guid: 5e1009983065714498fbedd206e6a96b, type: 2}
+  mountainTileBuilding: {fileID: 11400000, guid: 5bc0f90de5b1ef6478b17adee13075ce, type: 2}
   grasslandTileBuilding: {fileID: 11400000, guid: 19d453d11efa65a4f90a9710b81c7c36, type: 2}
-  farmTileBuilding: {fileID: 11400000, guid: aeea7b66e0fb66445b7c38e999a20c25, type: 2}
-  barracksTileBuilding: {fileID: 11400000, guid: db092c6a37c98e4489117c4115bddd02, type: 2}
+  farmTileBuilding: {fileID: 11400000, guid: a581a8222eda1554cabe25be2f83e720, type: 2}
+  barracksTileBuilding: {fileID: 11400000, guid: 358eba49aa8a6584b802699ad090a4eb, type: 2}
 --- !u!4 &303321031
 Transform:
   m_ObjectHideFlags: 0
@@ -3434,7 +3434,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -6272,7 +6272,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 9.6, y: 9.6}
+  m_Size: {x: 13, y: 10.5}
   m_EdgeRadius: 0
 --- !u!114 &1198752836
 MonoBehaviour:
