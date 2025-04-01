@@ -10,11 +10,12 @@ using System.Resources;
 public class BuyMenuManager : MonoBehaviour
 {
     [SerializeField] private Grid grid;
-    [SerializeField] private CanvasRenderer card;
     [SerializeField] private MapGenerator mapGenerator;
     [SerializeField] private buildingContext buildingContext;
     [SerializeField] private Tilemap buildingMap;
     [SerializeField] private ResourceManager resourceManager;
+    [SerializeField] private GameObject grassCard, mountainCard, forestCard, waterCard;
+    //[SerializeField] private GameObject card;
     private TextMeshProUGUI SideBarName;
     private TextMeshProUGUI cardName;
     private TextMeshProUGUI price;
@@ -86,36 +87,31 @@ public class BuyMenuManager : MonoBehaviour
             return;
         }
 
-        TextMeshProUGUI[] ts = this.transform.GetComponentsInChildren<TextMeshProUGUI>();
-
-        foreach (TextMeshProUGUI t in ts)
-        {
-            if (t.name == "CardName") cardName = t;
-            if (t.name == "Price") price = t;
-            if (t.name == "PriceAmount") priceAmount = t;
-        }
-
         // Set the card content based on the tile's name.
         switch (tile.name) {
             case "grass_0":
-                cardName.text = "grassland Building";
-                price.text = "People";
-                priceAmount.text = "5";
+                grassCard.SetActive(true);
+                mountainCard.SetActive(false);
+                forestCard.SetActive(false);
+                waterCard.SetActive(false);
                 break;
             case "water_0":
-                cardName.text = "water Building";
-                price.text = "People";
-                priceAmount.text = "5";
+                grassCard.SetActive(false);
+                mountainCard.SetActive(false);
+                forestCard.SetActive(false);
+                waterCard.SetActive(true);
                 break;
             case "rock_0":
-                cardName.text = "mountain Building";
-                price.text = "People";
-                priceAmount.text = "5";
+                grassCard.SetActive(false);
+                mountainCard.SetActive(true);
+                forestCard.SetActive(false);
+                waterCard.SetActive(false);
                 break;
-            case "forest_0":
-                cardName.text = "forest Building";
-                price.text = "People";
-                priceAmount.text = "5";
+            case "tree_0":
+                grassCard.SetActive(false);
+                mountainCard.SetActive(false);
+                forestCard.SetActive(true);
+                waterCard.SetActive(false);
                 break;
         }
     }
@@ -124,31 +120,28 @@ public class BuyMenuManager : MonoBehaviour
     /// Handles the purchase event for a building.
     /// Instantiates a building based on the tile type, updates the map, and reveals additional fog.
     /// </summary>
-    public void BuyEvent()
+    public void BuyEvent(string buildingName)
     {
-        if (tile.name == "grass_0")
+        IBuilding building = buildingName switch
         {
-            IBuilding building = new GrasslandBuilding();
-            buildingContext.setBuilding(building);
-        }
-        else if (tile.name == "water_0")
+            "House" => new House(),
+            "Farm" => new Farm(),
+            "Barracks" => new Barracks(),
+            "Docks" => new Docks(),
+            "Quarry" => new Quarry(),
+            "LumberMill" => new LumberMill(),
+            _ => null
+        };
+
+        buildingContext.setBuilding(building);
+
+        if (resourceManager.peopleCount >= buildingContext.building.peopleCost &&
+            resourceManager.woodCount >= buildingContext.building.woodCost &&
+            resourceManager.metalCount >= buildingContext.building.metalCost)
         {
-            IBuilding building = new WaterBuilding();
-            buildingContext.setBuilding(building);
-        }
-        else if (tile.name == "rock_0")
-        {
-            IBuilding building = new MountainBuilding();
-            buildingContext.setBuilding(building);
-        }
-        else if (tile.name == "tree_0")
-        {
-            IBuilding building = new ForestBuilding();
-            buildingContext.setBuilding(building);
-        }
-        if (resourceManager.peopleCount >= buildingContext.building.cost)
-        {
-            resourceManager.peopleCount -= buildingContext.building.cost;
+            resourceManager.peopleCount -= buildingContext.building.peopleCost;
+            resourceManager.woodCount -= buildingContext.building.woodCost;
+            resourceManager.metalCount -= buildingContext.building.metalCost;
             resourceManager.updateResourceCountText();
             buildingContext.addBuildingToTile(tilePosition, buildingMap);
 

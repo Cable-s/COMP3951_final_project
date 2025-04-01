@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 public class buildingContext : MonoBehaviour
 {
     internal IBuilding building;
-    [SerializeField] internal TileBase waterBuildingTile, forestTileBuilding, mountainTileBuilding, grasslandTileBuilding;
+    [SerializeField] internal TileBase waterBuildingTile, forestTileBuilding, mountainTileBuilding, grasslandTileBuilding, farmTileBuilding, barracksTileBuilding;
        
     /// <summary>
     /// unity builtin Start method
@@ -19,10 +19,12 @@ public class buildingContext : MonoBehaviour
     public void Start()
     {
         //each building static TileBase must be added here beacuse they are not MonoBehaviour and cannot have [SerializeField]s
-        ForestBuilding.tile = forestTileBuilding;
-        WaterBuilding.tile = waterBuildingTile;
-        MountainBuilding.tile = mountainTileBuilding;
-        GrasslandBuilding.tile = grasslandTileBuilding;
+        LumberMill.tile = forestTileBuilding;
+        Docks.tile = waterBuildingTile;
+        Quarry.tile = mountainTileBuilding;
+        House.tile = grasslandTileBuilding;
+        Farm.tile = farmTileBuilding;
+        Barracks.tile = barracksTileBuilding;
     }
 
     /// <summary>
@@ -62,7 +64,19 @@ public interface IBuilding
     /// <summary>
     /// int property for the building cost.
     /// </summary>
-    public int cost
+    public int peopleCost
+    {
+        get;
+        set;
+    }
+
+    public int woodCost
+    {
+        get;
+        set;
+    }
+
+    public int metalCost
     {
         get;
         set;
@@ -79,7 +93,7 @@ public interface IBuilding
 /// <summary>
 /// The building that get built on a forest.
 /// </summary>
-public class ForestBuilding : IBuilding
+public class LumberMill : IBuilding
 {
     /// <summary>
     /// Static TileBase field for the building 'sprite'.
@@ -87,9 +101,17 @@ public class ForestBuilding : IBuilding
     public static TileBase tile { get; set; }
 
     /// <summary>
-    /// int property for the building cost.
+    /// int property for the amount of required people to build.
     /// </summary>
-    public int cost { get; set; } = 5;
+    public int peopleCost { get; set; } = 3;
+    /// <summary>
+    /// int property for the amount of required wood to build.
+    /// </summary>
+    public int woodCost { get; set; } = 0;
+    /// <summary>
+    /// int property for the amount of required metal to build.
+    /// </summary>
+    public int metalCost { get; set; } = 0;
 
     /// <summary>
     /// Add the current building to the tilemap.
@@ -105,7 +127,7 @@ public class ForestBuilding : IBuilding
 /// <summary>
 /// The building that gets built on water.
 /// </summary>
-public class WaterBuilding : IBuilding
+public class Docks : IBuilding
 {
     /// <summary>
     /// Static TileBase field for the building 'sprite'.
@@ -113,9 +135,17 @@ public class WaterBuilding : IBuilding
     public static TileBase tile { get; set; }
 
     /// <summary>
-    /// int property for the building cost.
+    /// int property for the amount of required people to build.
     /// </summary>
-    public int cost { get; set; } = 4;
+    public int peopleCost { get; set; } = 1;
+    /// <summary>
+    /// int property for the amount of required wood to build.
+    /// </summary>
+    public int woodCost { get; set; } = 1;
+    /// <summary>
+    /// int property for the amount of required metal to build.
+    /// </summary>
+    public int metalCost { get; set; } = 0;
 
 
     /// <summary>
@@ -132,7 +162,7 @@ public class WaterBuilding : IBuilding
 /// <summary>
 /// The building that get built on mountains.
 /// </summary>
-public class MountainBuilding : IBuilding
+public class Quarry : IBuilding
 {
     /// <summary>
     /// Static TileBase field for the building 'sprite'.
@@ -140,9 +170,17 @@ public class MountainBuilding : IBuilding
     public static TileBase tile { get; set; }
 
     /// <summary>
-    /// int property for the building cost.
+    /// int property for the amount of required people to build.
     /// </summary>
-    public int cost { get; set; } = 3;
+    public int peopleCost { get; set; } = 1;
+    /// <summary>
+    /// int property for the amount of required wood to build.
+    /// </summary>
+    public int woodCost { get; set; } = 1;
+    /// <summary>
+    /// int property for the amount of required metal to build.
+    /// </summary>
+    public int metalCost { get; set; } = 0;
 
 
     /// <summary>
@@ -159,7 +197,7 @@ public class MountainBuilding : IBuilding
 /// <summary>
 /// The building that gets built on grasslands.
 /// </summary>
-public class GrasslandBuilding : IBuilding
+public class House : IBuilding
 {
     /// <summary>
     /// Static TileBase field for the building 'sprite'.
@@ -167,9 +205,87 @@ public class GrasslandBuilding : IBuilding
     public static TileBase tile { get; set; }
 
     /// <summary>
-    /// int property for the building cost.
+    /// int property for the amount of required people to build.
     /// </summary>
-    public int cost { get; set; } = 2;
+    public int peopleCost { get; set; } = 1;
+    /// <summary>
+    /// int property for the amount of required wood to build.
+    /// </summary>
+    public int woodCost { get; set; } = 0;
+    /// <summary>
+    /// int property for the amount of required metal to build.
+    /// </summary>
+    public int metalCost { get; set; } = 0;
+
+
+    /// <summary>
+    /// Add the current building to the tilemap.
+    /// </summary>
+    /// <param name="tilePosition">The position of the building</param>
+    /// <param name="buildingMap">The tilemap for buildings that the building will be added to.</param>
+    public void addBuildingToTile(Vector3Int tilePosition, Tilemap buildingMap)
+    {
+        buildingMap.SetTile(tilePosition, tile);
+    }
+}
+
+/// <summary>
+/// The building that gets built on grasslands.
+/// </summary>
+public class Farm : IBuilding
+{
+    /// <summary>
+    /// Static TileBase field for the building 'sprite'.
+    /// </summary>
+    public static TileBase tile { get; set; }
+
+    /// <summary>
+    /// int property for the amount of required people to build.
+    /// </summary>
+    public int peopleCost { get; set; } = 1;
+    /// <summary>
+    /// int property for the amount of required wood to build.
+    /// </summary>
+    public int woodCost { get; set; } = 1;
+    /// <summary>
+    /// int property for the amount of required metal to build.
+    /// </summary>
+    public int metalCost { get; set; } = 0;
+
+
+    /// <summary>
+    /// Add the current building to the tilemap.
+    /// </summary>
+    /// <param name="tilePosition">The position of the building</param>
+    /// <param name="buildingMap">The tilemap for buildings that the building will be added to.</param>
+    public void addBuildingToTile(Vector3Int tilePosition, Tilemap buildingMap)
+    {
+        buildingMap.SetTile(tilePosition, tile);
+    }
+}
+
+/// <summary>
+/// The building that gets built on grasslands.
+/// </summary>
+public class Barracks : IBuilding
+{
+    /// <summary>
+    /// Static TileBase field for the building 'sprite'.
+    /// </summary>
+    public static TileBase tile { get; set; }
+
+    /// <summary>
+    /// int property for the amount of required people to build.
+    /// </summary>
+    public int peopleCost { get; set; } = 1;
+    /// <summary>
+    /// int property for the amount of required wood to build.
+    /// </summary>
+    public int woodCost { get; set; } = 0;
+    /// <summary>
+    /// int property for the amount of required metal to build.
+    /// </summary>
+    public int metalCost { get; set; } = 3;
 
 
     /// <summary>
