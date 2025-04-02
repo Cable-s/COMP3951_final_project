@@ -101,6 +101,11 @@ public class Brute : IEnemy
         // Attempt to get a target if none exists, otherwise move to the target.
         targetPosition = buildingManager.GetNearestBuilding(position);
 
+        if(targetPosition == position)
+        {
+            buildingManager.RemoveBuiding(position);
+        }
+
         if (targetPosition == null)
         {
             MoveRandom();
