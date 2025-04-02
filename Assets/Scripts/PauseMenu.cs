@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Script for controlling in game PauseMenu behaviour.
-/// Created by Tanner Parkes
+/// <author> Tanner Parkes </author>
+/// <ref
 /// Referenced: (PAUSE MENU in Unity) https://www.youtube.com/watch?v=JivuXdrIHK0
 /// </summary>
 public class PauseMenu : MonoBehaviour
@@ -45,6 +46,21 @@ public class PauseMenu : MonoBehaviour
     {
         PauseMenuUI.SetActive(false);
         GameIsPaused = false;
+    }
+
+    /// <summary>
+    /// Toggle pause method, added to toggle the pause menu when the menu button is clicked.
+    /// </summary>
+    public void togglePause()
+    {
+        if (GameIsPaused)
+        {
+            Resume();
+        }
+        else
+        {
+            Pause();
+        }
     }
 
     /// <summary>

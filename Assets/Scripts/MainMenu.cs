@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Script for the MainMenu Behaviour. 
-/// Created by Tanner Parkes
+/// <author> Tanner Parkes </author>
+/// <references>
 /// Referenced: (Make your MAIN MENU Quickly! | Unity UI Tutorial For Beginners) https://www.youtube.com/watch?v=DX7HyN7oJjE 
 /// </summary>
 public class MainMenu : MonoBehaviour

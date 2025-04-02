@@ -16,7 +16,7 @@ using UnityEngine.WSA;
 ///</summary>
 public class BuildingManager : MonoBehaviour
 {
-    [SerializeField] internal TileBase waterBuildingTile, forestTileBuilding, mountainTileBuilding, grasslandTileBuilding, farmTileBuilding, barracksTileBuilding;
+    [SerializeField] internal TileBase waterBuildingTile, forestTileBuilding, mountainTileBuilding, grasslandTileBuilding, farmTileBuilding, barracksTileBuilding, mineTileBuilding;
     [SerializeField] private ResourceManager resourceManager;
     [SerializeField] private MapGenerator mapGenerator;
     [SerializeField] private Tilemap buildingMap;
@@ -37,6 +37,7 @@ public class BuildingManager : MonoBehaviour
         House.tile = grasslandTileBuilding;
         Farm.tile = farmTileBuilding;
         Barracks.tile = barracksTileBuilding;
+        Mine.tile = mineTileBuilding;
     }
 
     /// <summary>
@@ -53,6 +54,7 @@ public class BuildingManager : MonoBehaviour
             "Barracks" => new Barracks(position),
             "Dock" => new Dock(position),
             "Quarry" => new Quarry(position),
+            "Mine" => new Mine(position),
             "LumberMill" => new LumberMill(position),
             _ => null
         };
@@ -378,7 +380,7 @@ public class Dock : IBuilding
     /// <param name="resourceManager">The ResourceManager to modify.</param>
     public void OutputResources(ResourceManager resourceManager)
     {
-        resourceManager.waterCount++;
+        resourceManager.foodCount++;
     }
 }
 
@@ -417,11 +419,12 @@ public class Quarry : IBuilding
     /// <summary>
     /// int property for the amount of required wood to build.
     /// </summary>
-    public int woodCost { get; set; } = 1;
+    public int woodCost { get; set; } = 2;
     /// <summary>
     /// int property for the amount of required metal to build.
     /// </summary>
     public int metalCost { get; set; } = 0;
+
 
     /// <summary>
     /// The radius of vision for the building
@@ -461,9 +464,99 @@ public class Quarry : IBuilding
     /// <param name="resourceManager">The ResourceManager to modify.</param>
     public void OutputResources(ResourceManager resourceManager)
     {
+        resourceManager.stoneCount++;
+    }
+}
+
+
+/// <summary>
+/// The building that get built on mountains.
+/// </summary>
+public class Mine : IBuilding
+{
+    /// <summary>
+    /// Static TileBase field for the building 'sprite'.
+    /// </summary>
+    public static TileBase tile { get; set; }
+
+    /// <summary>
+    /// The number of buildings of this type that have ever been created. Used for assigning IDs
+    /// </summary>
+    public static int count
+    { get; set; } = 0;
+
+    /// <summary>
+    /// The position of the tile on the buildingMap
+    /// </summary>
+    public Vector3Int position
+    { get; set; }
+
+    /// <summary>
+    /// A unique identifier for the building
+    /// </summary>
+    public string ID
+    { get; set; }
+
+    /// <summary>
+    /// int property for the amount of required people to build.
+    /// </summary>
+    public int peopleCost { get; set; } = 1;
+    /// <summary>
+    /// int property for the amount of required wood to build.
+    /// </summary>
+    public int woodCost { get; set; } = 1;
+    /// <summary>
+    /// int property for the amount of required metal to build.
+    /// </summary>
+    public int metalCost { get; set; } = 0;
+
+    /// <summary>
+    /// int property for the amount of required metal to build.
+    /// </summary>
+    public int stoneCost { get; set; } = 1;
+
+    /// <summary>
+    /// The radius of vision for the building
+    /// </summary>
+    public int sight
+    { get; set; } = 2;
+
+    public Mine(Vector3Int position)
+    {
+        this.position = position;
+        ID = "Mine " + count;
+        count++;
+    }
+
+
+    /// <summary>
+    /// Add the current building to the tilemap.
+    /// </summary>
+    /// <param name="buildingMap">The tilemap for buildings that the building will be added to.</param>
+    public void AddBuildingToTile(Tilemap buildingMap)
+    {
+        buildingMap.SetTile(position, tile);
+    }
+
+    /// <summary>
+    /// Removes the current building from the tilemap.
+    /// </summary>
+    /// <param name="buildingMap">The tilemap for buildings that the building will be removed from.</param>
+    public void RemoveBuilding(Tilemap buildingMap)
+    {
+        buildingMap.SetTile(position, null);
+    }
+
+    /// <summary>
+    /// Outputs the appropriate resources for the building to a ResourceManager.
+    /// </summary>
+    /// <param name="resourceManager">The ResourceManager to modify.</param>
+    public void OutputResources(ResourceManager resourceManager)
+    {
         resourceManager.metalCount++;
     }
 }
+
 
 /// <summary>
 /// The building that gets built on grasslands.
@@ -500,7 +593,7 @@ public class House : IBuilding
     /// <summary>
     /// int property for the amount of required wood to build.
     /// </summary>
-    public int woodCost { get; set; } = 0;
+    public int woodCost { get; set; } = 1;
     /// <summary>
     /// int property for the amount of required metal to build.
     /// </summary>
@@ -671,6 +764,11 @@ public class Barracks : IBuilding
     /// int property for the amount of required metal to build.
     /// </summary>
     public int metalCost { get; set; } = 3;
+
+    /// <summary>
+    /// int property for the amount of required metal to build.
+    /// </summary>    
+    public int stoneCost {get; set; } = 3;
 
     /// <summary>
     /// The radius of vision for the building
