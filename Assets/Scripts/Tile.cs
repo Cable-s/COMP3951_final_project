@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
 {
+    [SerializeField] private GameObject highlight;
+    [SerializeField] internal Color mountainColor, riverColor, grasslandsColor, forestColor;
+    [SerializeField] internal SpriteRenderer spriteRenderer;
+
     private static System.Random rnd = new System.Random();
     private static int random = rnd.Next(-1000, 1000);
-    [SerializeField] private Color mountainColor, riverColor, grasslandsColor, forestColor;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private GameObject highlight;
+    private static BuyMenuManager buyMenu = null;
+
+    private void Start()
+    {
+        if (buyMenu == null) buyMenu = Transform.FindAnyObjectByType<BuyMenuManager>();
+    }
 
     public void Init(bool isOffset)
     {
@@ -39,5 +48,10 @@ public class Tile : MonoBehaviour
     void OnMouseExit() {
         highlight.SetActive(false);
     }
+
+    //private void OnMouseDown()
+    //{
+    //    buyMenu.toggle(this);
+    //}
 }
 

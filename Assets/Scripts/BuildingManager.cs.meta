@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d5848135f8141834ab097ced7a24dfdc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - waterBuildingTile: {instanceID: 0}
+  - forestTileBuilding: {fileID: 11400000, guid: 6de2bc3809c31c542aa5adfbe82a56f7, type: 2}
+  - mountainTileBuilding: {fileID: 11400000, guid: 48f25ef6c4838984eaf86c93f0c95223, type: 2}
+  - grasslandTileBuilding: {fileID: 11400000, guid: 41ee9ea0b0a77c7429cde8e2e178630e, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
