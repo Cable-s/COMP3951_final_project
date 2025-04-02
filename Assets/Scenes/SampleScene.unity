@@ -2096,7 +2096,7 @@ MonoBehaviour:
   grasslandTileBuilding: {fileID: 11400000, guid: 19d453d11efa65a4f90a9710b81c7c36, type: 2}
   farmTileBuilding: {fileID: 11400000, guid: a581a8222eda1554cabe25be2f83e720, type: 2}
   barracksTileBuilding: {fileID: 11400000, guid: 358eba49aa8a6584b802699ad090a4eb, type: 2}
-  mineTileBuilding: {fileID: 0}
+  mineTileBuilding: {fileID: 11400000, guid: a21fb7d4de643e34fae3dfb67517d13c, type: 2}
   resourceManager: {fileID: 556267469}
   mapGenerator: {fileID: 1198752832}
   buildingMap: {fileID: 1071015108}
@@ -5669,7 +5669,7 @@ MonoBehaviour:
   nextDayButton: {fileID: 618846186}
   peopleText: {fileID: 1676058132}
   foodText: {fileID: 244299704}
-  stoneText: {fileID: 0}
+  stoneText: {fileID: 229242270}
   woodText: {fileID: 583563139}
   metalText: {fileID: 271038889}
   dayCount: {fileID: 564232937}
