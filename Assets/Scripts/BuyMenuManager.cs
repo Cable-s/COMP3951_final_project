@@ -11,9 +11,8 @@ public class BuyMenuManager : MonoBehaviour
 {
     [SerializeField] private Grid grid;
     [SerializeField] private MapGenerator mapGenerator;
-    [SerializeField] private buildingContext buildingContext;
+    [SerializeField] private BuildingManager buildingManager;
     [SerializeField] private Tilemap buildingMap;
-    [SerializeField] private ResourceManager resourceManager;
     [SerializeField] private GameObject grassCard, mountainCard, forestCard, waterCard;
     //[SerializeField] private GameObject card;
     private TextMeshProUGUI SideBarName;
@@ -122,38 +121,8 @@ public class BuyMenuManager : MonoBehaviour
     /// </summary>
     public void BuyEvent(string buildingName)
     {
-        IBuilding building = buildingName switch
-        {
-            "House" => new House(),
-            "Farm" => new Farm(),
-            "Barracks" => new Barracks(),
-            "Docks" => new Docks(),
-            "Quarry" => new Quarry(),
-            "LumberMill" => new LumberMill(),
-            _ => null
-        };
-
-        buildingContext.setBuilding(building);
-
-        if (resourceManager.peopleCount >= buildingContext.building.peopleCost &&
-            resourceManager.woodCount >= buildingContext.building.woodCost &&
-            resourceManager.metalCount >= buildingContext.building.metalCost)
-        {
-            resourceManager.peopleCount -= buildingContext.building.peopleCost;
-            resourceManager.woodCount -= buildingContext.building.woodCost;
-            resourceManager.metalCount -= buildingContext.building.metalCost;
-            resourceManager.updateResourceCountText();
-            buildingContext.addBuildingToTile(tilePosition, buildingMap);
-
-
-            // Do not remove water tile when placing building on top
-            if (tile.name != "water_0")
-            {
-                mapGenerator.Tilemap.SetTile(tilePosition, null);
-            }
-
-            mapGenerator.RevealFog(tilePosition, 2); // reveal a small area of fog after a building is bought
-        }
+        //Call building manager add building
+        buildingManager.AddBuilding(buildingName, tilePosition);
     }
 
     public void CloseBuyMenu()

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      lumber_mill_0: 447380826595628944
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

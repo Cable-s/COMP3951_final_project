@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -11,17 +14,25 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private Tilemap enemiesMap;
     [SerializeField] private TileBase enemyTile;
 
-    private List<Enemy> EnemyList;
+    [Header("Managers")]
+    [SerializeField] private BuildingManager buildingManager;
+
+    private Dictionary<string, IEnemy> enemyDict;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        EnemyList = new List<Enemy>();
-        Enemy enemy1 = new Brute(Vector3Int.zero, "JASON");
-        Enemy enemy2 = new Brute(new Vector3Int(0, 2, 0), "BINGUS");
+        enemyDict = new Dictionary<string, IEnemy>();
 
-        EnemyList.Add(enemy1);
-        EnemyList.Add(enemy2);
+        Brute.tile = enemyTile;
+        Brute.enemiesMap = enemiesMap;
+        Brute.buildingManager = buildingManager;
+
+        IEnemy enemy1 = new Brute(new Vector3Int(-5, -10, 0));
+        IEnemy enemy2 = new Brute(new Vector3Int(-12, 12, 0));
+
+        enemyDict.Add(enemy1.ID, enemy1);
+        enemyDict.Add(enemy2.ID, enemy2);
 
         updateEnemies();
     }
@@ -30,44 +41,115 @@ public class EnemyManager : MonoBehaviour
     {
         enemiesMap.ClearAllTiles();
 
-        foreach (Enemy enemy in EnemyList)
+        foreach (IEnemy enemy in enemyDict.Values)
         {
-            Vector3Int newPosition = enemy.position + new Vector3Int(enemy.speed, 0, 0);
-            enemy.position = newPosition;
-            SetEnemy(enemy);
+            enemy.Act();
         }
-    }
-
-    private void SetEnemy(Enemy enemy)
-    {
-        Vector3Int position = enemy.position;
-        enemiesMap.SetTile(position, enemyTile);
     }
 }
 
-public interface Enemy
+public interface IEnemy
 {
-    public string name { get; set; }
+    /// <summary>
+    /// Static TileBase field for the enemy 'sprite'.
+    /// </summary>
+    public static TileBase tile { get; set; }
+
+    public static Tilemap enemiesMap { get; set; }
+
+    public static BuildingManager buildingManager { get; set; }
+
+    public static int count;
+    public string ID { get; set; }
     public Vector3Int position { get; set; }
     public int damage {  get; set; }
     public int health { get; set; }
     public int speed { get; set; }
+
+    public void Act();
 }
 
-public class Brute : Enemy
+public class Brute : IEnemy
 {
-    public string name { get; set; }
+    /// <summary>
+    /// Static TileBase field for the enemy 'sprite'.
+    /// </summary>
+    public static TileBase tile { get; set; }
+    public static Tilemap enemiesMap { get; set; }
+    public static BuildingManager buildingManager { get; set; }
+    private static int count;
+    public string ID { get; set; }
     public Vector3Int position { get; set; }
     public int damage { get; set; }
     public int health { get; set; }
     public int speed { get; set; }
 
-    public Brute(Vector3Int position, string name)
+    private Vector3Int? targetPosition;
+
+    public Brute(Vector3Int position)
     {
         this.position = position;
-        this.name = name;
         this.damage = 2;
         this.health = 10;
         this.speed = 1;
+        ID = "Brute " + count;
+        count++;
+    }
+
+    public void Act()
+    {
+        // Attempt to get a target if none exists, otherwise move to the target.
+        targetPosition = buildingManager.GetNearestBuilding(position);
+
+        if (targetPosition == null)
+        {
+            MoveRandom();
+        }
+        else
+        {
+            MoveToTarget();
+        }
+    }
+
+    private void MoveRandom()
+    {
+        enemiesMap.SetTile(position, null);
+        position = position + new Vector3Int(speed, 0, 0);
+        enemiesMap.SetTile(position, tile);
+    }
+
+    private void MoveToTarget()
+    {
+        //Check if targetPosition is null
+        if (targetPosition == null)
+        {
+            return;
+        }
+
+        enemiesMap.SetTile(position, null);
+
+        // Calculate the absolute difference between the two positions
+        Vector3Int difference = targetPosition.Value - position;
+
+        //Move towards in x and y if applicable
+        if(difference.x > 0)
+        {
+            position = new Vector3Int (position.x + 1, position.y, position.z);
+        }
+        else if (difference.x < 0)
+        {
+            position = new Vector3Int(position.x - 1, position.y, position.z);
+        }
+
+        if (difference.y > 0)
+        {
+            position = new Vector3Int(position.x, position.y + 1, position.z);
+        }
+        else if (difference.y < 0)
+        {
+            position = new Vector3Int(position.x, position.y - 1, position.z);
+        }
+
+        enemiesMap.SetTile(position, tile);
     }
 }

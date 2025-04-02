@@ -24,6 +24,9 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] internal TileBase waterTile, grasslandTile, forestTile, mountainTile, hoverTile;
     [SerializeField] private TileBase fogTile;
 
+    [Header("Managers")]
+    [SerializeField] private BuildingManager buildingManager;
+
     [Header("Map Configuration")]
     public int width = 30;          // Width of the map in cells.
     public int height = 30;         // Height of the map in cells.
@@ -75,7 +78,7 @@ public class MapGenerator : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        Vector3Int currentMousePosition = GetMousePosition(); 
+        Vector3Int currentMousePosition = GetMousePosition();
 
         // Update hover tile if the mouse has moved to a new cell.
         if (!currentMousePosition.Equals(previousMousePos))
@@ -88,7 +91,7 @@ public class MapGenerator : MonoBehaviour
         // Right-click (mouse button 1) removes building tiles at the current mouse cell.
         if (Input.GetMouseButton(1))
         {
-            buildingMap.SetTile(currentMousePosition, null);
+            buildingManager.RemoveBuiding(currentMousePosition);
         }
     }
 

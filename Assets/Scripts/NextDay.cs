@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public class NextDay : MonoBehaviour
 {
     [SerializeField] private ResourceManager resourceManager;
+    [SerializeField] private BuildingManager buildingManager;
     [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private MapGenerator mapGenerator;
     [SerializeField] private Tilemap buildingMap;
@@ -24,39 +25,10 @@ public class NextDay : MonoBehaviour
         //increment day count
         resourceManager.dayCount++;
         print(resourceManager.dayCount);
-        BoundsInt bounds = buildingMap.cellBounds;
-        //get all buildings on board
-        for (int x = bounds.x; x < bounds.xMax; x++)
-        {
-            for (int y = bounds.y; y < bounds.yMax; y++)
-            {
-                Vector3Int currentCell = new Vector3Int(x, y, 0);
-                TileBase currentTile = buildingMap.GetTile(currentCell);
 
-                if (currentTile != null)
-                {
-                    //add that buildings resource to running count
-                    switch (currentTile.name)
-                    {
-                        case "forestBuilding":
-                            print("FOREST BUILDING LOCATED AT " + x + ", " + y);
-                            resourceManager.woodCount++;
-                            break;
-                        case "mountainBuilding":
-                            resourceManager.metalCount++;
-                            break;
-                        case "house_0":
-                            resourceManager.foodCount++;
-                            break;
-                        case "boat2_0":
-                            resourceManager.waterCount++;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        }
+        //have the BuildingManager output resources for the day
+        buildingManager.OutputResources();
+
         //update UI for resources to have updated 
         resourceManager.updateResourceCountText();
         enemyManager.updateEnemies();

@@ -1936,7 +1936,7 @@ GameObject:
   - component: {fileID: 303321031}
   - component: {fileID: 303321030}
   m_Layer: 0
-  m_Name: BuildingContext
+  m_Name: BuildingManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1960,6 +1960,9 @@ MonoBehaviour:
   grasslandTileBuilding: {fileID: 11400000, guid: 19d453d11efa65a4f90a9710b81c7c36, type: 2}
   farmTileBuilding: {fileID: 11400000, guid: a581a8222eda1554cabe25be2f83e720, type: 2}
   barracksTileBuilding: {fileID: 11400000, guid: 358eba49aa8a6584b802699ad090a4eb, type: 2}
+  resourceManager: {fileID: 556267469}
+  mapGenerator: {fileID: 1198752832}
+  buildingMap: {fileID: 1071015108}
 --- !u!4 &303321031
 Transform:
   m_ObjectHideFlags: 0
@@ -3669,6 +3672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesMap: {fileID: 1492868557}
   enemyTile: {fileID: 11400000, guid: 7e439e8db9f3c5849a28915773756474, type: 2}
+  buildingManager: {fileID: 303321030}
 --- !u!4 &532490195
 Transform:
   m_ObjectHideFlags: 0
@@ -4283,6 +4287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceManager: {fileID: 556267469}
+  buildingManager: {fileID: 303321030}
   enemyManager: {fileID: 532490194}
   mapGenerator: {fileID: 1198752832}
   buildingMap: {fileID: 1071015108}
@@ -5093,9 +5098,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 1198752833}
   mapGenerator: {fileID: 1198752832}
-  buildingContext: {fileID: 303321030}
+  buildingManager: {fileID: 303321030}
   buildingMap: {fileID: 1071015108}
-  resourceManager: {fileID: 556267469}
   grassCard: {fileID: 1595733508}
   mountainCard: {fileID: 433533816}
   forestCard: {fileID: 1157031208}
@@ -6192,6 +6196,7 @@ MonoBehaviour:
   mountainTile: {fileID: 11400000, guid: 1bb4486a639e86e4da5ecc3f9196a526, type: 2}
   hoverTile: {fileID: 11400000, guid: 9122525c605c8424f9293b895dea44a6, type: 2}
   fogTile: {fileID: 11400000, guid: 27858e3102298c24ea096f4fd7856019, type: 2}
+  buildingManager: {fileID: 303321030}
   width: 30
   height: 30
   noiseScale: 1.5
@@ -7670,7 +7675,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 6
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
