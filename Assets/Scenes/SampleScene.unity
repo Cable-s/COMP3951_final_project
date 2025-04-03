@@ -524,54 +524,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103562131}
   m_CullTransparentMesh: 1
---- !u!1 &107312131
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 107312133}
-  - component: {fileID: 107312132}
-  m_Layer: 0
-  m_Name: BoardManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &107312132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107312131}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d2faaccddd2bc14ebe3e2a907200460, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 100
-  height: 100
-  tile: {fileID: 1297153644348931829, guid: f5d1051e134cd664fbe02607e213ef48, type: 3}
-  camera: {fileID: 519420032}
---- !u!4 &107312133
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107312131}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3874841, y: 0.33796132, z: 0.0864945}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &117870003
 GameObject:
   m_ObjectHideFlags: 0
@@ -3950,7 +3902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesMap: {fileID: 1492868557}
-  enemyTile: {fileID: 11400000, guid: 7e439e8db9f3c5849a28915773756474, type: 2}
+  enemyTile: {fileID: 11400000, guid: 9e059da9b23b2e441a243139e329fac5, type: 2}
   buildingManager: {fileID: 303321030}
 --- !u!4 &532490195
 Transform:
@@ -11327,7 +11279,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 107312133}
   - {fileID: 303321031}
   - {fileID: 794140177}
   - {fileID: 1872280564}

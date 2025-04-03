@@ -1,222 +1,61 @@
-using System;
-using System.Collections.Generic;
-using System.Resources;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
-using UnityEngine.WSA;
 
 ///This module is for the various buildings that the player can build.
 ///<author>Caleb Janzen</author>
 
-///<summary>
-/// The building context that interacts with Unity.
-///</summary>
-public class BuildingManager : MonoBehaviour
-{
-    [SerializeField] internal TileBase waterBuildingTile, forestTileBuilding, mountainTileBuilding, grasslandTileBuilding, farmTileBuilding, barracksTileBuilding, mineTileBuilding;
-    [SerializeField] private ResourceManager resourceManager;
-    [SerializeField] private MapGenerator mapGenerator;
-    [SerializeField] private Tilemap buildingMap;
-
-    private Dictionary<Vector3Int, IBuilding> buildingDict;
-
-    /// <summary>
-    /// unity builtin Start method
-    /// </summary>
-    public void Start()
-    {
-        buildingDict = new Dictionary<Vector3Int,IBuilding>();
-
-        //each building static TileBase must be added here beacuse they are not MonoBehaviour and cannot have [SerializeField]s
-        LumberMill.tile = forestTileBuilding;
-        Dock.tile = waterBuildingTile;
-        Quarry.tile = mountainTileBuilding;
-        House.tile = grasslandTileBuilding;
-        Farm.tile = farmTileBuilding;
-        Barracks.tile = barracksTileBuilding;
-        Mine.tile = mineTileBuilding;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="buildingType"></param> The type of building to add as a string ie. "Farm"
-    /// <param name="position"></param> The position of the building on the buildingMap as a Vector3Int
-    public void AddBuilding(string buildingType, Vector3Int position)
-    {
-        IBuilding currentBuilding = buildingType switch
-        {
-            "House" => new House(position),
-            "Farm" => new Farm(position),
-            "Barracks" => new Barracks(position),
-            "Dock" => new Dock(position),
-            "Quarry" => new Quarry(position),
-            "Mine" => new Mine(position),
-            "LumberMill" => new LumberMill(position),
-            _ => null
-        };
-
-        if (resourceManager.peopleCount >= currentBuilding.peopleCost &&
-            resourceManager.woodCount >= currentBuilding.woodCost &&
-            resourceManager.metalCount >= currentBuilding.metalCost)
-        {
-            resourceManager.peopleCount -= currentBuilding.peopleCost;
-            resourceManager.woodCount -= currentBuilding.woodCost;
-            resourceManager.metalCount -= currentBuilding.metalCost;
-            resourceManager.updateResourceCountText();
-            AddBuildingToTile(currentBuilding);
-            buildingDict.Add(position, currentBuilding);
-
-            // Do not remove water tile when placing building on top
-            if (buildingType != "Dock")
-            {
-                mapGenerator.Tilemap.SetTile(position, null);
-            }
-
-            mapGenerator.RevealFog(position, currentBuilding.sight); // reveal a small area of fog after a building is bought
-        }
-    }
-
-    /// <summary>
-    /// Checks if a specific tile on the buidingMap contains a building. If it does, removes the building object from the dictionary of buildings and from the map.
-    /// </summary>
-    /// <param name="position"></param>
-    public void RemoveBuiding(Vector3Int position)
-    {
-        if(buildingDict.ContainsKey(position))
-        {
-            IBuilding currentBuilding = buildingDict[position];
-            currentBuilding.RemoveBuilding(buildingMap);
-            buildingDict.Remove(position);
-        }
-    }
-
-    /// <summary>
-    /// Add the current building to the tilemap.
-    /// </summary>
-    /// <param name="tilePosition">The position of the building</param>
-    /// <param name="buildingMap">The tilemap for buildings that the building will be added to.</param>
-    public void AddBuildingToTile(IBuilding building)
-    {
-        building.AddBuildingToTile(buildingMap);
-    }
-
-    /// <summary>
-    /// Iterates through the dictionary of building objects and adds the appropriate resources for each to the resource manager
-    /// </summary>
-    public void OutputResources()
-    {
-        foreach(IBuilding building in buildingDict.Values)
-        {
-            building.OutputResources(resourceManager);
-        }
-    }
-
-    public Vector3Int? GetNearestBuilding(Vector3Int position)
-    {
-        if(buildingDict.Count == 0)
-        {
-            return null;
-        }
-
-        int lowestManhattanDistance = int.MaxValue;
-        int manhattanDistance;
-        Vector3Int? target = null;
-
-        foreach (IBuilding building in buildingDict.Values)
-        {
-            // Calculate the absolute difference between the two positions
-            Vector3Int difference = building.position - position;
-
-            // Get the absolute value of the difference in each direction
-            Vector3Int absoluteDifference = new Vector3Int(
-                Mathf.Abs(difference.x),
-                Mathf.Abs(difference.y),
-                0
-            );
-
-            manhattanDistance = Mathf.Abs(difference.x) + Mathf.Abs(difference.y);
-
-            if ( manhattanDistance < lowestManhattanDistance)
-            {
-                lowestManhattanDistance = manhattanDistance;
-                target = building.position;
-            }
-        }
-
-        return target;
-    }
-}
-
 /// <summary>
-/// The IBuilding interface.
+/// Interface for game buildings defining common properties and methods.
+/// Author: Caleb Janzen
 /// </summary>
 public interface IBuilding
 {
     /// <summary>
-    /// Static TileBase field for the building 'sprite'.
+    /// Tile representing the building visually.
     /// </summary>
-    public static TileBase tile
-    {get; set;}
+    public static TileBase tile { get; set; }
 
     /// <summary>
-    /// The number of buildings of this type that have ever been created. Used for assigning IDs
+    /// Counts total instances of the building.
     /// </summary>
-    public static int count
-    { get; set; }
+    public static int count { get; set; }
 
     /// <summary>
-    /// The position of the tile on the buildingMap
+    /// Position of the building on the tilemap.
     /// </summary>
-    public Vector3Int position 
-    { get; set;}
-    
+    public Vector3Int position { get; set; }
 
     /// <summary>
-    /// A unique identifier for the building
+    /// Unique identifier for the building.
     /// </summary>
-    public string ID
-    { get; set; }
-
+    public string ID { get; set; }
 
     /// <summary>
-    /// int property for the building cost.
+    /// Resource costs for constructing the building.
     /// </summary>
-    public int peopleCost
-    {get; set;}
-
-    public int woodCost
-    {get; set;}
-
-    public int metalCost
-    {get; set;}
+    public int peopleCost { get; set; }
+    public int woodCost { get; set; }
+    public int metalCost { get; set; }
 
     /// <summary>
-    /// The radius of vision for the building
+    /// Sight radius provided by the building.
     /// </summary>
-    public int sight
-    { get; set; }
+    public int sight { get; set; }
 
     /// <summary>
-    /// Add the current building to the tilemap.
+    /// Adds the building to a given tilemap.
     /// </summary>
-    /// <param name="buildingMap">The tilemap for buildings that the building will be added to.</param>
-    public void AddBuildingToTile(Tilemap buildingMap);
+    void AddBuildingToTile(Tilemap buildingMap);
 
     /// <summary>
-    /// Removes the current building from the tilemap.
+    /// Removes the building from a given tilemap.
     /// </summary>
-    /// <param name="buildingMap">The tilemap for buildings that the building will be removed from.</param>
-    public void RemoveBuilding(Tilemap buildingMap);
+    void RemoveBuilding(Tilemap buildingMap);
 
     /// <summary>
-    /// Outputs the appropriate resources for the building to a ResourceManager.
+    /// Outputs resources produced by the building.
     /// </summary>
-    /// <param name="resourceManager">The ResourceManager to modify.</param>
-    public void OutputResources(ResourceManager resourceManager);
+    void OutputResources(ResourceManager resourceManager);
 }
 
 /// <summary>
@@ -245,7 +84,7 @@ public class LumberMill : IBuilding
     /// A unique identifier for the building
     /// </summary>
     public string ID
-    { get; set;}
+    { get; set; }
 
     /// <summary>
     /// int property for the amount of required people to build.
@@ -768,7 +607,7 @@ public class Barracks : IBuilding
     /// <summary>
     /// int property for the amount of required metal to build.
     /// </summary>    
-    public int stoneCost {get; set; } = 3;
+    public int stoneCost { get; set; } = 3;
 
     /// <summary>
     /// The radius of vision for the building
