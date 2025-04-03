@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cc69bbaac057d7143ba4b05939086050
+guid: 873e34db8085f554c8aa8cc871d6507e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5933715298724706184
-    second: mine_0
+      213: -2935999929022289591
+    second: Summer3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mine_0
+      name: Summer3_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 2
-        width: 32
-        height: 27
+        y: 0
+        width: 2304
+        height: 1296
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 878863dbf5537ada0800000000000000
-      internalID: -5933715298724706184
+      spriteID: 949ed02ce9b3147d0800000000000000
+      internalID: -2935999929022289591
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      mine_0: -5933715298724706184
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
