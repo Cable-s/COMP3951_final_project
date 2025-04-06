@@ -440,7 +440,7 @@ public class House : IBuilding
     /// <summary>
     /// int property for the amount of required people to build.
     /// </summary>
-    public int peopleCost { get; set; } = 1;
+    public int peopleCost { get; set; } = 0;
     /// <summary>
     /// int property for the amount of required wood to build.
     /// </summary>
@@ -491,7 +491,7 @@ public class House : IBuilding
     /// <param name="resourceManager">The ResourceManager to modify.</param>
     public void OutputResources(ResourceManager resourceManager)
     {
-        resourceManager.peopleCount++;
+        return;
     }
 }
 
@@ -665,6 +665,6 @@ public class Barracks : IBuilding
     /// <param name="resourceManager">The ResourceManager to modify.</param>
     public void OutputResources(ResourceManager resourceManager)
     {
-        resourceManager.peopleCount += 5;
+        return;
     }
 }

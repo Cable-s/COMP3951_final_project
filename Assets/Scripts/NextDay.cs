@@ -28,15 +28,26 @@ public class NextDay : MonoBehaviour
         //increment day count
         resourceManager.dayCount++;
 
-        //have the BuildingManager output resources for the day
-        buildingManager.OutputResources();
-
         //people eat food, each person eats one food, else will remove people if there is not enough food
-        if (resourceManager.foodCount - resourceManager.peopleCount >= 0)
+        if (resourceManager.foodCount - resourceManager.populationCount >= 0)
         {
-            resourceManager.foodCount -= resourceManager.peopleCount;
+            resourceManager.foodCount -= resourceManager.populationCount;
+        }
+        else
+        {
+            resourceManager.populationCount += resourceManager.foodCount - resourceManager.populationCount;
+            resourceManager.peopleCount = resourceManager.populationCount - buildingManager.buildingDict.Count;
+            resourceManager.foodCount = 0;
         }
 
+        //lose if people has run out
+        if (resourceManager.populationCount <= 0)
+        {
+            print("you ran out of people");
+        }
+
+        //have the BuildingManager output resources for the day
+        buildingManager.OutputResources();
 
         //update UI for resources to have updated 
         resourceManager.updateResourceCountText();

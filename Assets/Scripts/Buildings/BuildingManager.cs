@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 
 ///This module is for the various buildings that the player can build.
@@ -107,6 +108,15 @@ public class BuildingManager : MonoBehaviour
         if (buildingDict.ContainsKey(position))
         {
             IBuilding currentBuilding = buildingDict[position];
+
+            if (currentBuilding is House)
+            {
+                resourceManager.populationCount--;
+                resourceManager.peopleCount--;
+                if (resourceManager.peopleCount < 0) resourceManager.peopleCount = 0;
+            }
+            else resourceManager.peopleCount += currentBuilding.peopleCost;
+            resourceManager.updateResourceCountText();
             currentBuilding.RemoveBuilding(buildingMap);
             buildingDict.Remove(position);
         }
@@ -119,6 +129,12 @@ public class BuildingManager : MonoBehaviour
     public void AddBuildingToTile(IBuilding building)
     {
         building.AddBuildingToTile(buildingMap);
+        if (building is House)
+        {
+            resourceManager.populationCount += 1;
+            resourceManager.peopleCount += 1;
+            resourceManager.updateResourceCountText();
+        }
     }
 
     /// <summary>
