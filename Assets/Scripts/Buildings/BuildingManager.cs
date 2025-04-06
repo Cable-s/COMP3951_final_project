@@ -35,7 +35,7 @@ public class BuildingManager : MonoBehaviour
     /// <summary>
     /// Dictionary holding all currently placed buildings mapped by their positions.
     /// </summary>
-    private Dictionary<Vector3Int, IBuilding> buildingDict;
+    internal Dictionary<Vector3Int, IBuilding> buildingDict { get; set; } = new Dictionary<Vector3Int, IBuilding>();
 
     /// <summary>
     /// Unity built-in method called on script initialization.
@@ -43,8 +43,6 @@ public class BuildingManager : MonoBehaviour
     /// </summary>
     public void Start()
     {
-        buildingDict = new Dictionary<Vector3Int, IBuilding>();
-
         // Assign tiles to static fields of buildings.
         LumberMill.tile = forestTileBuilding;
         Dock.tile = waterBuildingTile;
@@ -54,6 +52,8 @@ public class BuildingManager : MonoBehaviour
         Barracks.tile = barracksTileBuilding;
         Mine.tile = mineTileBuilding;
     }
+
+
 
     /// <summary>
     /// Adds a new building at the specified position if resources are sufficient.

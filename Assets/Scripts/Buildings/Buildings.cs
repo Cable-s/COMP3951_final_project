@@ -491,7 +491,7 @@ public class House : IBuilding
     /// <param name="resourceManager">The ResourceManager to modify.</param>
     public void OutputResources(ResourceManager resourceManager)
     {
-        resourceManager.foodCount++;
+        resourceManager.peopleCount++;
     }
 }
 
