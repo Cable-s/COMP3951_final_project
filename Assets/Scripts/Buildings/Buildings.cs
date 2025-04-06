@@ -36,6 +36,8 @@ public interface IBuilding
     public int peopleCost { get; set; }
     public int woodCost { get; set; }
     public int metalCost { get; set; }
+    public int stoneCost { get; set; }
+
 
     /// <summary>
     /// Sight radius provided by the building.
@@ -98,6 +100,10 @@ public class LumberMill : IBuilding
     /// int property for the amount of required metal to build.
     /// </summary>
     public int metalCost { get; set; } = 0;
+    /// <summary>
+    /// int property for the amount of required stone to build.
+    /// </summary>
+    public int stoneCost { get; set; } = 0;
 
     /// <summary>
     /// The radius of vision for the building
@@ -180,7 +186,10 @@ public class Dock : IBuilding
     /// int property for the amount of required metal to build.
     /// </summary>
     public int metalCost { get; set; } = 0;
-
+    /// <summary>
+    /// int property for the amount of required stone to build.
+    /// </summary>
+    public int stoneCost { get; set; } = 0;
     /// <summary>
     /// The radius of vision for the building
     /// </summary>
@@ -263,7 +272,10 @@ public class Quarry : IBuilding
     /// int property for the amount of required metal to build.
     /// </summary>
     public int metalCost { get; set; } = 0;
-
+    /// <summary>
+    /// int property for the amount of required stone to build.
+    /// </summary>
+    public int stoneCost { get; set; } = 0;
 
     /// <summary>
     /// The radius of vision for the building
@@ -437,7 +449,10 @@ public class House : IBuilding
     /// int property for the amount of required metal to build.
     /// </summary>
     public int metalCost { get; set; } = 0;
-
+    /// <summary>
+    /// int property for the amount of required stone to build.
+    /// </summary>
+    public int stoneCost { get; set; } = 0;
     /// <summary>
     /// The radius of vision for the building
     /// </summary>
@@ -520,7 +535,10 @@ public class Farm : IBuilding
     /// int property for the amount of required metal to build.
     /// </summary>
     public int metalCost { get; set; } = 0;
-
+    /// <summary>
+    /// int property for the amount of required stone to build.
+    /// </summary>
+    public int stoneCost { get; set; } = 0;
     /// <summary>
     /// The radius of vision for the building
     /// </summary>

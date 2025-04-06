@@ -77,11 +77,13 @@ public class BuildingManager : MonoBehaviour
         if (currentBuilding != null &&
             resourceManager.peopleCount >= currentBuilding.peopleCost &&
             resourceManager.woodCount >= currentBuilding.woodCost &&
-            resourceManager.metalCount >= currentBuilding.metalCost)
+            resourceManager.metalCount >= currentBuilding.metalCost &&
+            resourceManager.stoneCount >= currentBuilding.stoneCost)
         {
             resourceManager.peopleCount -= currentBuilding.peopleCost;
             resourceManager.woodCount -= currentBuilding.woodCost;
             resourceManager.metalCount -= currentBuilding.metalCost;
+            resourceManager.stoneCount -= currentBuilding.stoneCost;
             resourceManager.updateResourceCountText();
             AddBuildingToTile(currentBuilding);
             buildingDict.Add(position, currentBuilding);
