@@ -4221,7 +4221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <dayCount>k__BackingField: 1
-  <peopleCount>k__BackingField: 100
+  <peopleCount>k__BackingField: 0
   <populationCount>k__BackingField: 0
   <foodCount>k__BackingField: 100
   <stoneCount>k__BackingField: 100
