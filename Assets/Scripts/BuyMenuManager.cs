@@ -123,6 +123,7 @@ public class BuyMenuManager : MonoBehaviour
     {
         //Call building manager add building
         buildingManager.AddBuilding(buildingName, tilePosition);
+        this.CloseBuyMenu();
     }
 
     public void CloseBuyMenu()
