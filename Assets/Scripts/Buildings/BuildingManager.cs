@@ -21,17 +21,17 @@ public class BuildingManager : MonoBehaviour
     /// <summary>
     /// Reference to the ResourceManager for managing game resources.
     /// </summary>
-    [SerializeField] private ResourceManager resourceManager;
+    [SerializeField] internal ResourceManager resourceManager;
 
     /// <summary>
     /// Reference to the MapGenerator responsible for managing the game map.
     /// </summary>
-    [SerializeField] private MapGenerator mapGenerator;
+    [SerializeField] internal MapGenerator mapGenerator;
 
     /// <summary>
     /// Tilemap used for placing buildings.
     /// </summary>
-    [SerializeField] private Tilemap buildingMap;
+    [SerializeField] internal Tilemap buildingMap;
 
     /// <summary>
     /// Dictionary holding all currently placed buildings mapped by their positions.

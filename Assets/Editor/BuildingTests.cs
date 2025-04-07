@@ -5,7 +5,6 @@ using UnityEngine.TestTools;
 using UnityEngine.UIElements;
 using UnityEngine.Tilemaps;
 
-
 public class BuildingTests
 {
     [Test]
