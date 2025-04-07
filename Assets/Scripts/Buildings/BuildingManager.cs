@@ -16,7 +16,7 @@ public class BuildingManager : MonoBehaviour
     /// <summary>
     /// Tile assets representing different building types. Assigned via Unity Inspector.
     /// </summary>
-    [SerializeField] internal TileBase waterBuildingTile, forestTileBuilding, mountainTileBuilding, grasslandTileBuilding, farmTileBuilding, barracksTileBuilding, mineTileBuilding;
+    [SerializeField] internal TileBase waterBuildingTile, forestTileBuilding, mountainTileBuilding, grasslandTileBuilding, farmTileBuilding, barracksTileBuilding, mineTileBuilding, townhallTileBuilding;
 
     /// <summary>
     /// Reference to the ResourceManager for managing game resources.
@@ -52,9 +52,8 @@ public class BuildingManager : MonoBehaviour
         Farm.tile = farmTileBuilding;
         Barracks.tile = barracksTileBuilding;
         Mine.tile = mineTileBuilding;
+        Townhall.tile = townhallTileBuilding;
     }
-
-
 
     /// <summary>
     /// Adds a new building at the specified position if resources are sufficient.
@@ -72,6 +71,7 @@ public class BuildingManager : MonoBehaviour
             "Quarry" => new Quarry(position),
             "Mine" => new Mine(position),
             "LumberMill" => new LumberMill(position),
+            "Townhall" => new Townhall(position),
             _ => null
         };
 
@@ -113,9 +113,21 @@ public class BuildingManager : MonoBehaviour
             {
                 resourceManager.populationCount--;
                 resourceManager.peopleCount--;
-                if (resourceManager.peopleCount < 0) resourceManager.peopleCount = 0;
+
+                if (resourceManager.peopleCount < 0)
+                    resourceManager.peopleCount = 0;
             }
-            else resourceManager.peopleCount += currentBuilding.peopleCost;
+            else
+            {
+                resourceManager.peopleCount += currentBuilding.peopleCost;
+            }
+
+            // If Townhall has been destoryed, end game and load GameOver scene. 
+            if (currentBuilding is Townhall)
+            {
+                mapGenerator.HandleGameOver();
+            }
+
             resourceManager.updateResourceCountText();
             currentBuilding.RemoveBuilding(buildingMap);
             buildingDict.Remove(position);

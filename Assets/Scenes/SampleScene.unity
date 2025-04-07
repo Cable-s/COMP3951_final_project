@@ -1913,6 +1913,7 @@ MonoBehaviour:
   farmTileBuilding: {fileID: 11400000, guid: a581a8222eda1554cabe25be2f83e720, type: 2}
   barracksTileBuilding: {fileID: 11400000, guid: 358eba49aa8a6584b802699ad090a4eb, type: 2}
   mineTileBuilding: {fileID: 11400000, guid: a21fb7d4de643e34fae3dfb67517d13c, type: 2}
+  townhallTileBuilding: {fileID: 11400000, guid: eddd936fbb598e74ea2e06b930f9cd0b, type: 2}
   resourceManager: {fileID: 556267469}
   mapGenerator: {fileID: 1198752832}
   buildingMap: {fileID: 1071015108}

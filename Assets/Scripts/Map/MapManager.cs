@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Handles map generation, tile placement, and user interactions (such as hovering and clicking) on the map.
@@ -70,6 +71,10 @@ public class MapGenerator : MonoBehaviour
     {
         GenerateMap();
         RevealFog(Vector3Int.zero, 4); // Reveals fog around the origin cell with a vision radius of 4.
+        
+        // Add townhall in the center of the map
+        Vector3Int centerPosition = Vector3Int.zero;
+        buildingManager.AddBuilding("Townhall", centerPosition);
     }
 
     /// <summary>
@@ -86,12 +91,6 @@ public class MapGenerator : MonoBehaviour
             interactiveMap.SetTile(previousMousePos, null); // remove hover effect from the previous cell.
             interactiveMap.SetTile(currentMousePosition, hoverTile);  // st hover effect on the current cell.
             previousMousePos = currentMousePosition;
-        }
-
-        // Right-click (mouse button 1) removes building tiles at the current mouse cell.
-        if (Input.GetMouseButton(1))
-        {
-            buildingManager.RemoveBuiding(currentMousePosition);
         }
     }
 
@@ -182,5 +181,16 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Handles the game over condition when the townhall is destroyed or removed.
+    /// </summary>
+    public void HandleGameOver()
+    {
+        Debug.Log("Game Over: The townhall has been destroyed or removed."); // For testing purposes
+
+        // Load the GameOver scene
+        SceneManager.LoadScene("GameOver");
     }
 }

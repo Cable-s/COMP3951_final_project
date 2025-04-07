@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -663,6 +664,44 @@ public class Barracks : IBuilding
     /// Outputs the appropriate resources for the building to a ResourceManager.
     /// </summary>
     /// <param name="resourceManager">The ResourceManager to modify.</param>
+    public void OutputResources(ResourceManager resourceManager)
+    {
+        return;
+    }
+}
+
+
+public class Townhall : IBuilding
+{
+    public Vector3Int position { get; set; }
+    public string ID { get ; set; }
+    public int peopleCost { get; set; }
+    public int woodCost { get; set; }
+    public int metalCost { get; set; }
+    public int stoneCost { get; set; }
+    public int sight { get; set; }
+
+    public static TileBase tile { get; set; }
+
+    public static int count { get; set; } = 0;
+
+    public Townhall(Vector3Int position)
+    {
+        this.position = position;
+        ID = "Townhall: " + count;
+        count++;
+    }
+
+    public void AddBuildingToTile(Tilemap buildingMap)
+    {
+        buildingMap.SetTile(position, tile);
+    }
+
+    public void RemoveBuilding(Tilemap buildingMap)
+    {
+        buildingMap.SetTile(position, null);
+    }
+
     public void OutputResources(ResourceManager resourceManager)
     {
         return;
