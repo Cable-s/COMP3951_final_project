@@ -4,6 +4,9 @@ using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UIElements;
 using TMPro;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Editor")]
 
 public class ResourceManager : MonoBehaviour
 {
