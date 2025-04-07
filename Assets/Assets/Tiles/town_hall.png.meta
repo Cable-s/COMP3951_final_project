@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      town_hall_0: -1357620618914974549
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
