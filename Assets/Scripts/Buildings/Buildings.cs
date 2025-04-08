@@ -74,20 +74,17 @@ public class LumberMill : IBuilding
     /// <summary>
     /// The number of buildings of this type that have ever been created. Used for assigning IDs
     /// </summary>
-    public static int count
-    { get; set; } = 0;
+    public static int count { get; set; } = 0;
 
     /// <summary>
     /// The position of the tile on the buildingMap
     /// </summary>
-    public Vector3Int position
-    { get; set; }
+    public Vector3Int position { get; set; }
 
     /// <summary>
     /// A unique identifier for the building
     /// </summary>
-    public string ID
-    { get; set; }
+    public string ID { get; set; }
 
     /// <summary>
     /// int property for the amount of required people to build.
@@ -109,8 +106,7 @@ public class LumberMill : IBuilding
     /// <summary>
     /// The radius of vision for the building
     /// </summary>
-    public int sight
-    { get; set; } = 2;
+    public int sight { get; set; } = 2;
 
     public LumberMill(Vector3Int position)
     {
@@ -160,20 +156,17 @@ public class Dock : IBuilding
     /// <summary>
     /// The number of buildings of this type that have ever been created. Used for assigning IDs
     /// </summary>
-    public static int count
-    { get; set; } = 0;
+    public static int count { get; set; } = 0;
 
     /// <summary>
     /// The position of the tile on the buildingMap
     /// </summary>
-    public Vector3Int position
-    { get; set; }
+    public Vector3Int position { get; set; }
 
     /// <summary>
     /// A unique identifier for the building
     /// </summary>
-    public string ID
-    { get; set; }
+    public string ID { get; set; }
 
     /// <summary>
     /// int property for the amount of required people to build.
@@ -246,33 +239,33 @@ public class Quarry : IBuilding
     /// <summary>
     /// The number of buildings of this type that have ever been created. Used for assigning IDs
     /// </summary>
-    public static int count
-    { get; set; } = 0;
+    public static int count { get; set; } = 0;
 
     /// <summary>
     /// The position of the tile on the buildingMap
     /// </summary>
-    public Vector3Int position
-    { get; set; }
+    public Vector3Int position { get; set; }
 
     /// <summary>
     /// A unique identifier for the building
     /// </summary>
-    public string ID
-    { get; set; }
+    public string ID { get; set; }
 
     /// <summary>
     /// int property for the amount of required people to build.
     /// </summary>
     public int peopleCost { get; set; } = 1;
+
     /// <summary>
     /// int property for the amount of required wood to build.
     /// </summary>
     public int woodCost { get; set; } = 2;
+
     /// <summary>
     /// int property for the amount of required metal to build.
     /// </summary>
     public int metalCost { get; set; } = 0;
+
     /// <summary>
     /// int property for the amount of required stone to build.
     /// </summary>
@@ -281,8 +274,7 @@ public class Quarry : IBuilding
     /// <summary>
     /// The radius of vision for the building
     /// </summary>
-    public int sight
-    { get; set; } = 2;
+    public int sight { get; set; } = 2;
 
     public Quarry(Vector3Int position)
     {
@@ -334,20 +326,17 @@ public class Mine : IBuilding
     /// <summary>
     /// The number of buildings of this type that have ever been created. Used for assigning IDs
     /// </summary>
-    public static int count
-    { get; set; } = 0;
+    public static int count { get; set; } = 0;
 
     /// <summary>
     /// The position of the tile on the buildingMap
     /// </summary>
-    public Vector3Int position
-    { get; set; }
+    public Vector3Int position { get; set; }
 
     /// <summary>
     /// A unique identifier for the building
     /// </summary>
-    public string ID
-    { get; set; }
+    public string ID { get; set; }
 
     /// <summary>
     /// int property for the amount of required people to build.
@@ -370,8 +359,7 @@ public class Mine : IBuilding
     /// <summary>
     /// The radius of vision for the building
     /// </summary>
-    public int sight
-    { get; set; } = 2;
+    public int sight { get; set; } = 2;
 
     public Mine(Vector3Int position)
     {
@@ -423,20 +411,17 @@ public class House : IBuilding
     /// <summary>
     /// The number of buildings of this type that have ever been created. Used for assigning IDs
     /// </summary>
-    public static int count
-    { get; set; } = 0;
+    public static int count { get; set; } = 0;
 
     /// <summary>
     /// The position of the tile on the buildingMap
     /// </summary>
-    public Vector3Int position
-    { get; set; }
+    public Vector3Int position { get; set; }
 
     /// <summary>
     /// A unique identifier for the building
     /// </summary>
-    public string ID
-    { get; set; }
+    public string ID { get; set; }
 
     /// <summary>
     /// int property for the amount of required people to build.
@@ -457,8 +442,7 @@ public class House : IBuilding
     /// <summary>
     /// The radius of vision for the building
     /// </summary>
-    public int sight
-    { get; set; } = 2;
+    public int sight { get; set; } = 2;
 
     public House(Vector3Int position)
     {
@@ -509,42 +493,42 @@ public class Farm : IBuilding
     /// <summary>
     /// The number of buildings of this type that have ever been created. Used for assigning IDs
     /// </summary>
-    public static int count
-    { get; set; } = 0;
+    public static int count { get; set; } = 0;
 
     /// <summary>
     /// The position of the tile on the buildingMap
     /// </summary>
-    public Vector3Int position
-    { get; set; }
+    public Vector3Int position { get; set; }
 
     /// <summary>
     /// A unique identifier for the building
     /// </summary>
-    public string ID
-    { get; set; }
+    public string ID { get; set; }
 
     /// <summary>
     /// int property for the amount of required people to build.
     /// </summary>
     public int peopleCost { get; set; } = 1;
+
     /// <summary>
     /// int property for the amount of required wood to build.
     /// </summary>
     public int woodCost { get; set; } = 1;
+
     /// <summary>
     /// int property for the amount of required metal to build.
     /// </summary>
     public int metalCost { get; set; } = 0;
+
     /// <summary>
     /// int property for the amount of required stone to build.
     /// </summary>
     public int stoneCost { get; set; } = 0;
+
     /// <summary>
     /// The radius of vision for the building
     /// </summary>
-    public int sight
-    { get; set; } = 2;
+    public int sight { get; set; } = 2;
 
     public Farm(Vector3Int position)
     {
@@ -552,7 +536,6 @@ public class Farm : IBuilding
         ID = "Farm " + count;
         count++;
     }
-
 
     /// <summary>
     /// Add the current building to the tilemap.
@@ -583,7 +566,8 @@ public class Farm : IBuilding
 }
 
 /// <summary>
-/// The building that gets built on grasslands.
+/// The building that attacks enemies within its kill range.
+/// Built on grasslands, does not output resources.
 /// </summary>
 public class Barracks : IBuilding
 {
@@ -595,25 +579,23 @@ public class Barracks : IBuilding
     /// <summary>
     /// The number of buildings of this type that have ever been created. Used for assigning IDs
     /// </summary>
-    public static int count
-    { get; set; } = 0;
+    public static int count{ get; set; } = 0;
 
     /// <summary>
     /// The position of the tile on the buildingMap
     /// </summary>
-    public Vector3Int position
-    { get; set; }
+    public Vector3Int position{ get; set; }
 
     /// <summary>
     /// A unique identifier for the building
     /// </summary>
-    public string ID
-    { get; set; }
+    public string ID { get; set; }
 
     /// <summary>
     /// int property for the amount of required people to build.
     /// </summary>
     public int peopleCost { get; set; } = 1;
+
     /// <summary>
     /// int property for the amount of required wood to build.
     /// </summary>
@@ -631,8 +613,12 @@ public class Barracks : IBuilding
     /// <summary>
     /// The radius of vision for the building
     /// </summary>
-    public int sight
-    { get; set; } = 3;
+    public int sight { get; set; } = 3;
+    
+    /// <summary>
+    /// Radius in which enemies are killed
+    /// </summary>
+    public int killRange { get; set; } = 2;
 
     public Barracks(Vector3Int position)
     {
@@ -640,7 +626,6 @@ public class Barracks : IBuilding
         ID = "Barracks " + count;
         count++;
     }
-
 
     /// <summary>
     /// Add the current building to the tilemap.
@@ -670,11 +655,14 @@ public class Barracks : IBuilding
     }
 }
 
-
+/// <summary>
+/// The main building that may be tied to win/loss conditions.
+/// </summary>
 public class Townhall : IBuilding
 {
     public Vector3Int position { get; set; }
-    public string ID { get ; set; }
+    public string ID { get; set; }
+
     public int peopleCost { get; set; }
     public int woodCost { get; set; }
     public int metalCost { get; set; }
@@ -682,7 +670,6 @@ public class Townhall : IBuilding
     public int sight { get; set; }
 
     public static TileBase tile { get; set; }
-
     public static int count { get; set; } = 0;
 
     public Townhall(Vector3Int position)
@@ -692,16 +679,25 @@ public class Townhall : IBuilding
         count++;
     }
 
+    /// <summary>
+    /// Adds the townhall tile to the tilemap.
+    /// </summary>
     public void AddBuildingToTile(Tilemap buildingMap)
     {
         buildingMap.SetTile(position, tile);
     }
 
+    /// <summary>
+    /// Removes the townhall tile from the tilemap.
+    /// </summary>
     public void RemoveBuilding(Tilemap buildingMap)
     {
         buildingMap.SetTile(position, null);
     }
 
+    /// <summary>
+    /// Townhall does not produce resources.
+    /// </summary>
     public void OutputResources(ResourceManager resourceManager)
     {
         return;

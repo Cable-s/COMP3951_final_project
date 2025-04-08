@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
@@ -187,6 +188,32 @@ public class BuildingManager : MonoBehaviour
         }
 
         return target;
+    }
+
+    /// <summary>
+    /// Checks whether the given position is within the kill range of any active Barracks.
+    /// Used by enemies to determine if they should die before moving into a dangerous tile.
+    /// </summary>
+    public bool IsWithinBarracksKillRange(Vector3Int enemyPosition)
+    {
+        // Iterate through all placed buildings in the game
+        foreach (var building in buildingDict.Values)
+        {
+            // If the building is Barracks
+            if (building is Barracks barracks)
+            {
+                // Calculate the Manhattan distance between the Barracks and the enemy
+                int distance = Mathf.Abs(barracks.position.x - enemyPosition.x) +
+                               Mathf.Abs(barracks.position.y - enemyPosition.y);
+
+                // If the enemy is within the Barracks' kill range, return true
+                if (distance <= barracks.killRange)
+                    return true;
+            }
+        }
+
+        // Otherwise, return false.
+        return false;
     }
 }
 

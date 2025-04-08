@@ -67,6 +67,8 @@ public interface IEnemy
     public int speed { get; set; }
 
     public void Act();
+
+    public void Die();
 }
 
 public class Brute : IEnemy
@@ -96,26 +98,34 @@ public class Brute : IEnemy
         count++;
     }
 
+    /// <summary>
+    /// Main enemy behavior each frame. Gets target and decides to move or attack.
+    /// </summary>
     public void Act()
     {
         // Attempt to get a target if none exists, otherwise move to the target.
         targetPosition = buildingManager.GetNearestBuilding(position);
 
+        // If already on a building tile, destroy it.
         if(targetPosition == position)
         {
             buildingManager.RemoveBuiding(position);
         }
 
+        // If there's no building, wander randomly.
         if (targetPosition == null)
         {
             MoveRandom();
         }
         else
         {
-            MoveToTarget();
+            MoveToTarget(); // If there is building, move to it. 
         }
     }
 
+    /// <summary>
+    /// Moves enemy in a straight line (used when no target exists).
+    /// </summary>
     private void MoveRandom()
     {
         enemiesMap.SetTile(position, null);
@@ -123,6 +133,9 @@ public class Brute : IEnemy
         enemiesMap.SetTile(position, tile);
     }
 
+    /// <summary>
+    /// Moves the enemy one step toward its target. Dies if entering a Barrakcs kill range.
+    /// </summary>
     private void MoveToTarget()
     {
         //Check if targetPosition is null
@@ -133,28 +146,54 @@ public class Brute : IEnemy
 
         enemiesMap.SetTile(position, null);
 
+        // Initialize next position as current
+        Vector3Int nextPosition = position;
+
         // Calculate the absolute difference between the two positions
         Vector3Int difference = targetPosition.Value - position;
 
         //Move towards in x and y if applicable
         if(difference.x > 0)
         {
-            position = new Vector3Int (position.x + 1, position.y, position.z);
+            //position = new Vector3Int (position.x + 1, position.y, position.z);
+            nextPosition.x += 1;
         }
         else if (difference.x < 0)
         {
-            position = new Vector3Int(position.x - 1, position.y, position.z);
+            //position = new Vector3Int(position.x - 1, position.y, position.z);
+            nextPosition.x -= 1;
         }
 
         if (difference.y > 0)
         {
-            position = new Vector3Int(position.x, position.y + 1, position.z);
+            //position = new Vector3Int(position.x, position.y + 1, position.z);
+            nextPosition.y += 1;
         }
         else if (difference.y < 0)
         {
-            position = new Vector3Int(position.x, position.y - 1, position.z);
+            //position = new Vector3Int(position.x, position.y - 1, position.z);
+            nextPosition.y -= 1;
         }
 
+        // If next position is inside a Barracks kill zome, enemy dies.
+        if (buildingManager.IsWithinBarracksKillRange(nextPosition))
+        {
+            Die();
+            return;
+        }
+
+        // Move enemy and draw tile at new position
+        position = nextPosition;
         enemiesMap.SetTile(position, tile);
+    }
+
+    /// <summary>
+    /// Removes the enemy from the map. 
+    /// </summary>
+    public void Die()
+    {
+        enemiesMap.SetTile(position, null);
+
+        Debug.Log($"{ID} was killed within Barracks kill range.");
     }
 }
