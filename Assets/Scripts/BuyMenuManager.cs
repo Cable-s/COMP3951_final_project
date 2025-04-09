@@ -80,7 +80,7 @@ public class BuyMenuManager : MonoBehaviour
     private void UpdateCard()
     {
         // This if statement prevents player from placing building when there is a fog
-        if (mapGenerator.FogOfWar.GetTile(tilePosition) != null || mapGenerator.BuildingMap.GetTile(tilePosition) != null)
+        if (mapGenerator.FogOfWar.GetTile(tilePosition) != null || buildingMap.GetTile(tilePosition) != null)
         {
             this.CloseBuyMenu();
             return;
