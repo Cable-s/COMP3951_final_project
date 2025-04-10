@@ -4,6 +4,9 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Editor")]
 
+/// <summary>
+/// Tracks and updates resource values
+/// </summary>
 public class ResourceManager : MonoBehaviour
 {
     [field: SerializeField] internal int dayCount { get; set; } = 1;
@@ -27,6 +30,9 @@ public class ResourceManager : MonoBehaviour
         updateResourceCountText();
     }
 
+    /// <summary>
+    /// Updates UI text per resource values
+    /// </summary>
     public void updateResourceCountText()
     {
         dayText.text = "Day " + dayCount;

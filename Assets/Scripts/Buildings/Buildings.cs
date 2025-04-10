@@ -689,6 +689,10 @@ public class Barracks : IBuilding
         }
     }
 
+    /// <summary>
+    /// Calculates the tiles within the sight range of the barracks
+    /// </summary>
+    /// <returns></returns>
     private List<Vector3Int> PopulatePositionsInRange()
     {
         List<Vector3Int> positionsInRange = new List<Vector3Int>();
@@ -712,6 +716,10 @@ public class Barracks : IBuilding
         return positionsInRange;
     }
 
+    /// <summary>
+    /// Implementation of a Fischer Yates Shuffle for fair targeting each turn
+    /// https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+    /// </summary>
     private void ShufflePositionsInRange()
     {
         int x = positionsInRange.Count;

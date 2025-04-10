@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-
+/// <summary>
+/// Performs the main gameplay loop for each day, 
+/// updating enemies, resources, and buildings per their respective managers
+/// </summary>
 public class NextDay : MonoBehaviour
 {
     [SerializeField] private ResourceManager resourceManager;
@@ -13,11 +15,9 @@ public class NextDay : MonoBehaviour
     [SerializeField] private MapGenerator mapGenerator;
     [SerializeField] private Tilemap buildingMap;
     [SerializeField] private Tilemap terrainMap;
-    private Dictionary<Vector3Int, IBuilding> buildings;
 
     void Start()
     {
-        buildings = buildingManager.buildingDict;
         Button btn = this.GetComponent<Button>();
         btn.onClick.AddListener(nextDay);
     }
@@ -57,9 +57,11 @@ public class NextDay : MonoBehaviour
         
     }
 
-    private int getBuldingPopulation() {
+    private int getBuldingPopulation() 
+    {
         int total = 0;
-        foreach (IBuilding building in buildingManager.buildingDict.Values) {
+        foreach (IBuilding building in buildingManager.buildingDict.Values) 
+        {
             total += building.peopleCost;
         }
         return total;

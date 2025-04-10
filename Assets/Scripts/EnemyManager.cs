@@ -2,7 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-
+/// <summary>
+/// Manages Enemies through spawning, updating, having them act, and removing.
+/// Author: Jason Peacock
+/// </summary>
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private Tilemap enemiesMap;
@@ -14,13 +17,15 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private ResourceManager resourceManager;
 
     private Dictionary<string, IEnemy> enemyDict;
-    private Dictionary<Vector3Int, IEnemy> enemyPositionDict;
+
     private int minX;
     private int maxX;
     private int minY;
     private int maxY;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    /// <summary>
+    /// Once after MonoBehaviour is created, initialize class data
+    /// </summary>
     void Start()
     {
         //Create dictionary to store enemy objects
@@ -36,21 +41,20 @@ public class EnemyManager : MonoBehaviour
         maxX = (mapGenerator.width - 1) - mapGenerator.width / 2;
         minY = 0 - mapGenerator.height / 2;
         maxY = (mapGenerator.height - 1) - mapGenerator.height / 2;
-
-        //updateEnemies();
     }
 
+    /// <summary>
+    /// Loops through all enemies managed by the manager and performs their action
+    /// </summary>
     public void updateEnemies()
     {
+        // Have all enemies act
         foreach (IEnemy enemy in enemyDict.Values)
         {
             enemy.Act();
         }
 
-        //for (int x = 0; x < 2; x++)
-        //{
-        //    SpawnEnemy();
-        //}
+        // Spawn a wave of enemies of some size after some number of rounds
         if(resourceManager.dayCount % 5 == 0 && resourceManager.dayCount > 0)
         {
             int enemiesToSpawn = resourceManager.dayCount / 4;
@@ -67,6 +71,9 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawn a single enemy on a perimeter position of the map
+    /// </summary>
     private void SpawnEnemy()
     {
         //Get a tile location on the perimeter of the map
@@ -82,6 +89,10 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets a random position on the perimeter of the map
+    /// </summary>
+    /// <returns>A position on the perimeter of the map</returns>
     private Vector3Int getPerimeterPosition()
     {
         //Represents which edge to generate the enemy [0=Left, 1=Right, 2=Bottom, 3=Top]
@@ -115,6 +126,11 @@ public class EnemyManager : MonoBehaviour
         return position;
     }
 
+    /// <summary>
+    /// Loops over enemies and returns true if one is on the given position
+    /// </summary>
+    /// <param name="position">The position to check if an Enemy is on</param>
+    /// <returns></returns>
     public bool positionContainsEnemy(Vector3Int position)
     {
         foreach (IEnemy enemy in enemyDict.Values)
@@ -128,6 +144,10 @@ public class EnemyManager : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Removes an enemy from the dictionary by position
+    /// </summary>
+    /// <param name="position">The position of the enemy to remove</param>
     public void removeEnemy(Vector3Int position)
     {
         foreach (IEnemy enemy in enemyDict.Values)
@@ -140,16 +160,29 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Removes an enemy from the dictionary by ID
+    /// </summary>
+    /// <param name="position">The ID of the enemy to remove</param>
     public void removeEnemy(string id)
     {
         enemyDict.Remove(id);
     }
 
+    /// <summary>
+    /// Adds an enemy to the dictionary
+    /// </summary>
+    /// <param name="enemy">The IEnemy object to add</param>
     public void addEnemy(IEnemy enemy)
     {
         enemyDict.Add(enemy.ID, enemy);
     }
 
+    /// <summary>
+    /// Gets an enemy from the dictionary by position
+    /// </summary>
+    /// <param name="position">The position of the enemy to return</param>
+    /// <returns></returns>
     public IEnemy getEnemy(Vector3Int position)
     {
         foreach (IEnemy enemy in enemyDict.Values)
@@ -164,33 +197,32 @@ public class EnemyManager : MonoBehaviour
     }
 }
 
+/// <summary>
+/// Interface for enemies defining common properties and methods.
+/// </summary>
 public interface IEnemy
 {
     /// <summary>
     /// Static TileBase field for the enemy 'sprite'.
     /// </summary>
     public static TileBase tile { get; set; }
-
     public static Tilemap enemiesMap { get; set; }
-
     public static BuildingManager buildingManager { get; set; }
-
     public static EnemyManager enemyManager { get; set; }
-
     public static int count;
     public string ID { get; set; }
     public Vector3Int position { get; set; }
     public int damage {  get; set; }
     public int health { get; set; }
     public int speed { get; set; }
-
     public bool isAlive { get; set; }
-
     public void Act();
-
     public void Die();
 }
 
+/// <summary>
+/// A basic enemy that moves towards buildings and destroys them
+/// </summary>
 public class Brute : IEnemy
 {
     /// <summary>
@@ -321,10 +353,10 @@ public class Brute : IEnemy
     /// </summary>
     public void Die()
     {
+        //Clear sprite on map
         enemiesMap.SetTile(position, null);
 
+        //Remove enemy from dictionary
         enemyManager.removeEnemy(ID);
-
-        Debug.Log($"{ID} was killed within Barracks kill range.");
     }
 }
