@@ -10300,6 +10300,22 @@ PrefabInstance:
       propertyPath: peopleText
       value: 
       objectReference: {fileID: 1676058132}
+    - target: {fileID: 3793580386975628651, guid: 95ab7a84da4c59a48bf74b449365d104, type: 3}
+      propertyPath: <foodCount>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3793580386975628651, guid: 95ab7a84da4c59a48bf74b449365d104, type: 3}
+      propertyPath: <woodCount>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3793580386975628651, guid: 95ab7a84da4c59a48bf74b449365d104, type: 3}
+      propertyPath: <metalCount>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3793580386975628651, guid: 95ab7a84da4c59a48bf74b449365d104, type: 3}
+      propertyPath: <stoneCount>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5925285151277695445, guid: 95ab7a84da4c59a48bf74b449365d104, type: 3}
       propertyPath: m_Name
       value: ResourceManager
