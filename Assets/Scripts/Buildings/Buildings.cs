@@ -563,7 +563,7 @@ public class Farm : IBuilding
     /// <param name="resourceManager">The ResourceManager to modify.</param>
     public void OutputResources(ResourceManager resourceManager)
     {
-        resourceManager.foodCount += 10;
+        resourceManager.foodCount += 3;
     }
 }
 

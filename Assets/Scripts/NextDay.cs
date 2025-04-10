@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
-
+using UnityEngine.SceneManagement;
+using System.Resources;
 
 
 public class NextDay : MonoBehaviour
@@ -36,14 +37,15 @@ public class NextDay : MonoBehaviour
         else
         {
             resourceManager.populationCount += resourceManager.foodCount - resourceManager.populationCount;
-            resourceManager.peopleCount = resourceManager.populationCount - buildingManager.buildingDict.Count;
+            resourceManager.peopleCount = resourceManager.populationCount - getBuldingPopulation();
+            if (resourceManager.peopleCount < 0) resourceManager.peopleCount = 0;
             resourceManager.foodCount = 0;
         }
 
         //lose if people has run out
         if (resourceManager.populationCount <= 0)
         {
-            print("you ran out of people");
+            SceneManager.LoadScene(2);
         }
 
         //update and spawn enemies before buildings are considered
@@ -55,6 +57,14 @@ public class NextDay : MonoBehaviour
         //update UI for resources to have updated 
         resourceManager.updateResourceCountText();
         
+    }
+
+    private int getBuldingPopulation() {
+        int total = 0;
+        foreach (IBuilding building in buildingManager.buildingDict.Values) {
+            total += building.peopleCost;
+        }
+        return total;
     }
 }
 

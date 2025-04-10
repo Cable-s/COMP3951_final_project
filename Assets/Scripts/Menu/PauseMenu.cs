@@ -6,14 +6,19 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Script for controlling in game PauseMenu behaviour.
 /// <author> Tanner Parkes </author>
-/// <ref
+/// <references>
 /// Referenced: (PAUSE MENU in Unity) https://www.youtube.com/watch?v=JivuXdrIHK0
+/// </references>
 /// </summary>
 public class PauseMenu : MonoBehaviour
 {
 
     public static bool GameIsPaused = false;
     public GameObject PauseMenuUI;
+
+    /// <summary>
+    /// Method that allows using the escape key to open the in-game menu
+    /// </summary>
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

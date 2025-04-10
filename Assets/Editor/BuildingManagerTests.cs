@@ -162,7 +162,7 @@ public class BuildingManagerTests : MonoBehaviour
 
     // Test 5: Ensure House is added when sufficient resources are available
     [Test]
-    public void AddHousel_WhenSufficientResources_AddsBuildingToDictionaryAndDeductsResources()
+    public void AddHouse_WhenSufficientResources_AddsBuildingToDictionaryAndDeductsResources()
     {
         // Arrange: Define the building type and position
         string buildingType = "House";
@@ -179,7 +179,7 @@ public class BuildingManagerTests : MonoBehaviour
         Assert.IsTrue(manager.buildingDict.ContainsKey(position));
 
         // Assert: Ensure resources are deducted correctly
-        Assert.AreEqual(11, resourceManager.peopleCount);  // 0 person cost
+        Assert.AreEqual(13, resourceManager.peopleCount);  // 0 person cost
         Assert.AreEqual(9, resourceManager.woodCount);    // 1 wood cost
         Assert.AreEqual(10, resourceManager.metalCount);   // 0 metal cost
         Assert.AreEqual(10, resourceManager.stoneCount);   // 0 stone cost
@@ -544,8 +544,8 @@ public class BuildingManagerTests : MonoBehaviour
         manager.RemoveBuiding(position);
 
         // Assert: people and population are updated correctly
-        Assert.AreEqual(10, resourceManager.peopleCount);     //resource back to where it started
-        Assert.AreEqual(10, resourceManager.populationCount); //resource back to where it started
+        Assert.AreEqual(12, resourceManager.peopleCount);     //resource back to where it started
+        Assert.AreEqual(12, resourceManager.populationCount); //resource back to where it started
 
         // Assert: buildingDict does not contain building
         Assert.IsFalse(manager.buildingDict.ContainsKey(position));
@@ -575,7 +575,7 @@ public class BuildingManagerTests : MonoBehaviour
 
         // Assert: people and population are updated correctly
         Assert.AreEqual(0, resourceManager.peopleCount);      //people resource lowest should be 0
-        Assert.AreEqual(10, resourceManager.populationCount); //resource back to where it started
+        Assert.AreEqual(12, resourceManager.populationCount); //resource back to where it started
 
         // Assert: buildingDict does not contain building
         Assert.IsFalse(manager.buildingDict.ContainsKey(position));
@@ -688,8 +688,8 @@ public class BuildingManagerTests : MonoBehaviour
         manager.AddBuildingToTile(building);
 
         // Assert: people and population update correctly when adding House
-        Assert.AreEqual(11, resourceManager.peopleCount);
-        Assert.AreEqual(11, resourceManager.populationCount);
+        Assert.AreEqual(13, resourceManager.peopleCount);
+        Assert.AreEqual(13, resourceManager.populationCount);
 
         // Assert: building map added the building
         Assert.IsNotNull(buildingMap.GetTile(position));
