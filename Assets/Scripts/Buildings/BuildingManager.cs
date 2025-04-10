@@ -15,7 +15,7 @@ public class BuildingManager : MonoBehaviour
     /// <summary>
     /// Tile assets representing different building types. Assigned via Unity Inspector.
     /// </summary>
-    [SerializeField] internal TileBase waterBuildingTile, forestTileBuilding, mountainTileBuilding, grasslandTileBuilding, farmTileBuilding, barracksTileBuilding, mineTileBuilding, townhallTileBuilding;
+    [SerializeField] internal TileBase waterBuildingTile, forestTileBuilding, mountainTileBuilding, grasslandTileBuilding, farmTileBuilding, barracksTileBuilding, mineTileBuilding, townhallTileBuilding, outpostTileBuilding, grassTile;
 
     /// <summary>
     /// Reference to the ResourceManager for managing game resources.
@@ -57,6 +57,7 @@ public class BuildingManager : MonoBehaviour
         Barracks.tile = barracksTileBuilding;
         Mine.tile = mineTileBuilding;
         Townhall.tile = townhallTileBuilding;
+        Outpost.tile = outpostTileBuilding;
 
         // Assign EnemyManager to barracks so it can interact with enemies
         Barracks.enemyManager = enemyManager;
@@ -79,6 +80,7 @@ public class BuildingManager : MonoBehaviour
             "Mine" => new Mine(position),
             "LumberMill" => new LumberMill(position),
             "Townhall" => new Townhall(position),
+            "Outpost" => new Outpost(position),
             _ => null
         };
 
@@ -99,7 +101,7 @@ public class BuildingManager : MonoBehaviour
             // Preserve water tiles when building a dock.
             if (buildingType != "Dock")
             {
-                mapGenerator.Tilemap.SetTile(position, null);
+                mapGenerator.Tilemap.SetTile(position, grassTile);
             }
 
             mapGenerator.RevealFog(position, currentBuilding.sight);
