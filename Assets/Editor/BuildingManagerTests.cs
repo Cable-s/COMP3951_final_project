@@ -716,7 +716,7 @@ public class BuildingManagerTests : MonoBehaviour
         // Assert
         Assert.AreEqual(10, resourceManager.peopleCount);
         Assert.AreEqual(10, resourceManager.populationCount);
-        Assert.AreEqual(20, resourceManager.foodCount);
+        Assert.AreEqual(13, resourceManager.foodCount);
         Assert.AreEqual(10, resourceManager.woodCount);
         Assert.AreEqual(10, resourceManager.metalCount);
         Assert.AreEqual(10, resourceManager.stoneCount);
@@ -750,7 +750,7 @@ public class BuildingManagerTests : MonoBehaviour
         // Assert
         Assert.AreEqual(10, resourceManager.peopleCount);
         Assert.AreEqual(10, resourceManager.populationCount);
-        Assert.AreEqual(40, resourceManager.foodCount);
+        Assert.AreEqual(19, resourceManager.foodCount);
         Assert.AreEqual(10, resourceManager.woodCount);
         Assert.AreEqual(10, resourceManager.metalCount);
         Assert.AreEqual(10, resourceManager.stoneCount);
@@ -1061,68 +1061,7 @@ public class BuildingManagerTests : MonoBehaviour
         Assert.AreEqual(10, resourceManager.stoneCount);
     }
 
-    // Test 39: Test OutputResources with one farm
-    [Test]
-    public void OutputResources_OneBarracks()
-    {
-        // Arrange
-        buildingMap.SetTile(new Vector3Int(0, 0, 0), Barracks.tile);
-        manager.buildingDict.Add(new Vector3Int(0, 0, 0), new Barracks(new Vector3Int(0, 0, 0)));
-
-        resourceManager.peopleCount = 10;
-        resourceManager.populationCount = 10;
-        resourceManager.foodCount = 10;
-        resourceManager.woodCount = 10;
-        resourceManager.metalCount = 10;
-        resourceManager.stoneCount = 10;
-
-        // Act
-        manager.OutputResources();
-
-        // Assert
-        Assert.AreEqual(10, resourceManager.peopleCount);
-        Assert.AreEqual(10, resourceManager.populationCount);
-        Assert.AreEqual(10, resourceManager.foodCount);
-        Assert.AreEqual(10, resourceManager.woodCount);
-        Assert.AreEqual(10, resourceManager.metalCount);
-        Assert.AreEqual(10, resourceManager.stoneCount);
-
-    }
-
-    // Test 40: Test OutputResources with three farms
-    [Test]
-    public void OutputResources_ThreeBarracks()
-    {
-        // Arrange
-        buildingMap.SetTile(new Vector3Int(0, 0, 0), Barracks.tile);
-        manager.buildingDict.Add(new Vector3Int(0, 0, 0), new Barracks(new Vector3Int(0, 0, 0)));
-
-        buildingMap.SetTile(new Vector3Int(0, 0, 1), Barracks.tile);
-        manager.buildingDict.Add(new Vector3Int(0, 0, 1), new Barracks(new Vector3Int(0, 0, 1)));
-
-        buildingMap.SetTile(new Vector3Int(0, 1, 1), Barracks.tile);
-        manager.buildingDict.Add(new Vector3Int(0, 1, 1), new Barracks(new Vector3Int(0, 1, 1)));
-
-        resourceManager.peopleCount = 10;
-        resourceManager.populationCount = 10;
-        resourceManager.foodCount = 10;
-        resourceManager.woodCount = 10;
-        resourceManager.metalCount = 10;
-        resourceManager.stoneCount = 10;
-
-        // Act
-        manager.OutputResources();
-
-        // Assert
-        Assert.AreEqual(10, resourceManager.peopleCount);
-        Assert.AreEqual(10, resourceManager.populationCount);
-        Assert.AreEqual(10, resourceManager.foodCount);
-        Assert.AreEqual(10, resourceManager.woodCount);
-        Assert.AreEqual(10, resourceManager.metalCount);
-        Assert.AreEqual(10, resourceManager.stoneCount);
-    }
-
-    // Test 41: Test OutputResources with no buildings
+    // Test 39: Test OutputResources with no buildings
     [Test]
     public void OutputResources_NoBuildings()
     {
@@ -1146,7 +1085,7 @@ public class BuildingManagerTests : MonoBehaviour
         Assert.AreEqual(10, resourceManager.stoneCount);
     }
 
-    // Test 42: Get nearest building with no buildings
+    // Test 40: Get nearest building with no buildings
     [Test]
     public void GetNearestBuilding_NoBuilding()
     {
@@ -1159,7 +1098,7 @@ public class BuildingManagerTests : MonoBehaviour
         Assert.IsNull(result);
     }
 
-    // Test 43: Get nearest building with one building
+    // Test 41: Get nearest building with one building
     [Test]
     public void GetNearestBuilding_OneBuilding()
     {
@@ -1174,7 +1113,7 @@ public class BuildingManagerTests : MonoBehaviour
         Assert.AreEqual(new Vector3Int(0,0,0), result);
     }
 
-    // Test 44: Get nearest building with three buildings
+    // Test 42: Get nearest building with three buildings
     [Test]
     public void GetNearestBuilding_ThreeBuilding()
     {

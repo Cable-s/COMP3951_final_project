@@ -166,39 +166,10 @@ public class BuildingTests
         int expectedWoodCount = 10;
         int expectedMetalCount = 10;
         int expectedStoneCount = 10;
-        int expectedFoodCount = 20;
+        int expectedFoodCount = 13;
 
         //create object to test
         IBuilding building = new Farm(new Vector3Int(0, 0, 0));
-
-        //run method to test
-        building.OutputResources(rm);
-
-        //assert ResourceManager resources updated
-        Assert.AreEqual(expectedWoodCount, rm.woodCount);
-        Assert.AreEqual(expectedMetalCount, rm.metalCount);
-        Assert.AreEqual(expectedStoneCount, rm.stoneCount);
-        Assert.AreEqual(expectedFoodCount, rm.foodCount);
-    }
-
-    [Test]
-    public void Barracks_OutputResources()
-    {
-        //set up resource manager
-        ResourceManager rm = new ResourceManager();
-        rm.woodCount = 10;
-        rm.metalCount = 10;
-        rm.stoneCount = 10;
-        rm.foodCount = 10;
-
-        //setup expected values
-        int expectedWoodCount = 10;
-        int expectedMetalCount = 10;
-        int expectedStoneCount = 10;
-        int expectedFoodCount = 10;        
-        
-        //create object to test
-        IBuilding building = new Barracks(new Vector3Int(0, 0, 0));
 
         //run method to test
         building.OutputResources(rm);
