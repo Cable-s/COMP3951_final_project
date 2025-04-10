@@ -1,9 +1,12 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
-
+/// <summary>
+/// Performs the main gameplay loop for each day, 
+/// updating enemies, resources, and buildings per their respective managers
+/// </summary>
 public class NextDay : MonoBehaviour
 {
     [SerializeField] private ResourceManager resourceManager;
@@ -21,17 +24,47 @@ public class NextDay : MonoBehaviour
 
     void nextDay()
     {
-        print("next day");
         //increment day count
         resourceManager.dayCount++;
-        print(resourceManager.dayCount);
+
+        //people eat food, each person eats one food, else will remove people if there is not enough food
+        if (resourceManager.foodCount - resourceManager.populationCount >= 0)
+        {
+            resourceManager.foodCount -= resourceManager.populationCount;
+        }
+        else
+        {
+            resourceManager.populationCount += resourceManager.foodCount - resourceManager.populationCount;
+            resourceManager.peopleCount = resourceManager.populationCount - getBuldingPopulation();
+            if (resourceManager.peopleCount < 0) resourceManager.peopleCount = 0;
+            resourceManager.foodCount = 0;
+        }
+
+        //lose if people has run out
+        if (resourceManager.populationCount <= 0)
+        {
+            SceneManager.LoadScene(2);
+        }
+
+        //update and spawn enemies before buildings are considered
+        enemyManager.updateEnemies();
 
         //have the BuildingManager output resources for the day
         buildingManager.OutputResources();
 
         //update UI for resources to have updated 
         resourceManager.updateResourceCountText();
-        enemyManager.updateEnemies();
+        
+    }
+
+    private int getBuldingPopulation() 
+    {
+        int total = 0;
+        foreach (IBuilding building in buildingManager.buildingDict.Values) 
+        {
+            total += building.peopleCost;
+        }
+        return total;
     }
 }
 

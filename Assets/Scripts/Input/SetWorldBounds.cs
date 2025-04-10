@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 /// <summary>
 /// Sets the global world boundaries based on the Collider2D attached to the same GameObject.

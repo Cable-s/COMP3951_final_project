@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.UIElements;
 using TMPro;
 
 public class InitializeCanvas : MonoBehaviour

@@ -1,11 +1,7 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
-using System.Net.NetworkInformation;
-using System.Resources;
+
 
 public class BuyMenuManager : MonoBehaviour
 {
@@ -80,7 +76,7 @@ public class BuyMenuManager : MonoBehaviour
     private void UpdateCard()
     {
         // This if statement prevents player from placing building when there is a fog
-        if (mapGenerator.FogOfWar.GetTile(tilePosition) != null || mapGenerator.BuildingMap.GetTile(tilePosition) != null)
+        if (mapGenerator.FogOfWar.GetTile(tilePosition) != null || buildingMap.GetTile(tilePosition) != null || tile == null)
         {
             this.CloseBuyMenu();
             return;
@@ -123,6 +119,7 @@ public class BuyMenuManager : MonoBehaviour
     {
         //Call building manager add building
         buildingManager.AddBuilding(buildingName, tilePosition);
+        this.CloseBuyMenu();
     }
 
     public void CloseBuyMenu()
