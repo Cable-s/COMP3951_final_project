@@ -144,8 +144,8 @@ public class BuildingManager : MonoBehaviour
         building.AddBuildingToTile(buildingMap);
         if (building is House)
         {
-            resourceManager.populationCount += 1;
-            resourceManager.peopleCount += 1;
+            resourceManager.populationCount += 3;
+            resourceManager.peopleCount += 3;
             resourceManager.updateResourceCountText();
         }
     }
