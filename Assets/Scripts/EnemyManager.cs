@@ -1,15 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using Codice.CM.Client.Differences.Merge;
-using JetBrains.Annotations;
-using NUnit.Framework;
-using Unity.VisualScripting;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
+
 
 public class EnemyManager : MonoBehaviour
 {

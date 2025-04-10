@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,13 +13,13 @@ public class GameOver : MonoBehaviour
     //Method for NewGame button to change the scene to the ingame scene.
     public void NewGame()
     {
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadSceneAsync(1);
     }
 
     //Method for the main menu button to change the scene to the main menu.
     public void MainMenu()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadSceneAsync(0);
     }
 
     //Method for the Quit button to exit the application.

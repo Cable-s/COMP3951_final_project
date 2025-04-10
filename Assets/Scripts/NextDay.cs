@@ -1,10 +1,8 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using System.Resources;
 
 
 public class NextDay : MonoBehaviour

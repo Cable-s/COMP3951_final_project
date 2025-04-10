@@ -1,5 +1,3 @@
-using NUnit.Framework;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;

@@ -1,10 +1,5 @@
-using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
-using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 
 /// <summary>

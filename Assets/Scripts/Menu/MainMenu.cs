@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,7 +14,7 @@ public class MainMenu : MonoBehaviour
     //Method for Start Button to change the scene to the ingame scene.
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadSceneAsync(1);
     }
 
     //Method for the Quit button to exit the application.
