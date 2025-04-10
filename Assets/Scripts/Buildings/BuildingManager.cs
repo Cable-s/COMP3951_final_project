@@ -25,6 +25,11 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] internal ResourceManager resourceManager;
 
     /// <summary>
+    /// Reference to the ResourceManager for managing game resources.
+    /// </summary>
+    [SerializeField] internal EnemyManager enemyManager;
+
+    /// <summary>
     /// Reference to the MapGenerator responsible for managing the game map.
     /// </summary>
     [SerializeField] internal MapGenerator mapGenerator;
@@ -54,6 +59,9 @@ public class BuildingManager : MonoBehaviour
         Barracks.tile = barracksTileBuilding;
         Mine.tile = mineTileBuilding;
         Townhall.tile = townhallTileBuilding;
+
+        // Assign EnemyManager to barracks so it can interact with enemies
+        Barracks.enemyManager = enemyManager;
     }
 
     /// <summary>
@@ -178,7 +186,7 @@ public class BuildingManager : MonoBehaviour
 
         foreach (IBuilding building in buildingDict.Values)
         {
-            int manhattanDistance = Mathf.Abs(building.position.x - position.x) + Mathf.Abs(building.position.y - position.y);
+            int manhattanDistance = getManhattanDistance(building.position, position);
 
             if (manhattanDistance < lowestManhattanDistance)
             {
@@ -197,23 +205,29 @@ public class BuildingManager : MonoBehaviour
     public bool IsWithinBarracksKillRange(Vector3Int enemyPosition)
     {
         // Iterate through all placed buildings in the game
-        foreach (var building in buildingDict.Values)
+        foreach (IBuilding building in buildingDict.Values)
         {
             // If the building is Barracks
             if (building is Barracks barracks)
             {
                 // Calculate the Manhattan distance between the Barracks and the enemy
-                int distance = Mathf.Abs(barracks.position.x - enemyPosition.x) +
-                               Mathf.Abs(barracks.position.y - enemyPosition.y);
+                int manhattanDistance = getManhattanDistance(barracks.position, enemyPosition);
 
                 // If the enemy is within the Barracks' kill range, return true
-                if (distance <= barracks.killRange)
+                if (manhattanDistance <= barracks.killRange)
                     return true;
             }
         }
 
         // Otherwise, return false.
         return false;
+    }
+
+    private int getManhattanDistance(Vector3Int position1, Vector3Int position2)
+    {
+        int manhattanDistance = Mathf.Abs(position1.x - position2.x) + Mathf.Abs(position1.y - position2.y);
+
+        return manhattanDistance;
     }
 }
 

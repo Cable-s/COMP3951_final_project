@@ -46,12 +46,15 @@ public class NextDay : MonoBehaviour
             print("you ran out of people");
         }
 
+        //update and spawn enemies before buildings are considered
+        enemyManager.updateEnemies();
+
         //have the BuildingManager output resources for the day
         buildingManager.OutputResources();
 
         //update UI for resources to have updated 
         resourceManager.updateResourceCountText();
-        enemyManager.updateEnemies();
+        
     }
 }
 

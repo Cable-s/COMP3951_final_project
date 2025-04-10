@@ -1,6 +1,8 @@
+using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 
 ///This module is for the various buildings that the player can build.
 ///<author>Caleb Janzen</author>
@@ -572,6 +574,11 @@ public class Farm : IBuilding
 public class Barracks : IBuilding
 {
     /// <summary>
+    /// The enemyManager for identifying and modifying enemies close to the Barracks
+    /// </summary>
+    public static EnemyManager enemyManager { get; set; }
+
+    /// <summary>
     /// Static TileBase field for the building 'sprite'.
     /// </summary>
     public static TileBase tile { get; set; }
@@ -620,11 +627,17 @@ public class Barracks : IBuilding
     /// </summary>
     public int killRange { get; set; } = 2;
 
+    private List<Vector3Int> positionsInRange;
+
+    private int killsPerRound = 1;
+
     public Barracks(Vector3Int position)
     {
         this.position = position;
         ID = "Barracks " + count;
+        positionsInRange = PopulatePositionsInRange();
         count++;
+        
     }
 
     /// <summary>
@@ -651,7 +664,68 @@ public class Barracks : IBuilding
     /// <param name="resourceManager">The ResourceManager to modify.</param>
     public void OutputResources(ResourceManager resourceManager)
     {
-        return;
+        //Shuffle positions in range to avoid bias towards particular tiles
+        ShufflePositionsInRange();
+
+        int killCount = 0;
+
+        //Go through the list in random order until you exhaust the list or find a tile that contains an enemy some number of times
+        //If a searched tile contains an enemy kill the enemy
+        foreach (Vector3Int position in positionsInRange)
+        {
+            if(enemyManager.positionContainsEnemy(position))
+            {
+                IEnemy enemy = enemyManager.getEnemy(position);
+
+                enemy.Die();
+
+                if(killCount == killsPerRound - 1)
+                {
+                    break;
+                }
+                else
+                {
+                    count++;
+                } 
+            }
+        }
+    }
+
+    private List<Vector3Int> PopulatePositionsInRange()
+    {
+        List<Vector3Int> positionsInRange = new List<Vector3Int>();
+
+        //Generate a list of positions in Vector3Int form that represent the tiles the Barracks can hit around it
+        // Loop over a square region around the center cell.
+        for (int x = -killRange; x <= killRange; x++)
+        {
+            for (int y = -killRange; y <= killRange; y++)
+            {
+                Vector3Int cell = position + new Vector3Int(x, y, 0);
+
+                // Only add cells within the circular area defined by the killRange radius.
+                if (Vector3Int.Distance(position, cell) <= killRange)
+                {
+                    positionsInRange.Add(cell);
+                }
+            }
+        }
+
+        return positionsInRange;
+    }
+
+    private void ShufflePositionsInRange()
+    {
+        int x = positionsInRange.Count;
+        while (x > 1)
+        {
+            x--;
+            int k = Random.Range(0, x + 1);
+
+            Vector3Int value = positionsInRange[x];
+            positionsInRange[x] = positionsInRange[k];
+            positionsInRange[k] = value;
+        }
     }
 }
 
